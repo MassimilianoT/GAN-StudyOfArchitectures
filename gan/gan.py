@@ -33,6 +33,8 @@ cuda = True if torch.cuda.is_available() else False
 class Generator(nn.Module):
     def __init__(self, latent_dim=100, img_shape=(1, 28, 28)):
         super(Generator, self).__init__()
+        self.latent_dim = latent_dim
+        self.img_shape = img_shape
 
         def block(in_feat, out_feat, normalize=True):
             layers = [nn.Linear(in_feat, out_feat)]
@@ -59,6 +61,7 @@ class Generator(nn.Module):
 class Discriminator(nn.Module):
     def __init__(self,img_shape=(1, 28, 28)):
         super(Discriminator, self).__init__()
+        self.img_shape = img_shape
 
         self.model = nn.Sequential(
             nn.Linear(int(np.prod(self.img_shape)), 512),
