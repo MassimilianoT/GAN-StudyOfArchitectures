@@ -45,7 +45,8 @@ class Generator(nn.Module):
         super(Generator, self).__init__()
         self.channels = channels
         self.latent_dim = latent_dim
-        self.init_size = img_size // 4
+        self.img_size = img_size
+        self.init_size = self.img_size // 4
         self.l1 = nn.Sequential(nn.Linear(self.latent_dim, 128 * self.init_size ** 2))
         
         self.conv_blocks = nn.Sequential(
@@ -77,8 +78,8 @@ class Discriminator(nn.Module):
         # Upsampling
         self.down = nn.Sequential(nn.Conv2d(channels, 64, 3, 2, 1), nn.ReLU())
         # Fully-connected layers
-        self.down_size = img_size // 2
-        down_dim = 64 * (img_size // 2) ** 2
+        self.down_size = self.img_size // 2
+        down_dim = 64 * (self.img_size // 2) ** 2
         self.fc = nn.Sequential(
             nn.Linear(down_dim, 32),
             nn.BatchNorm1d(32, 0.8),
