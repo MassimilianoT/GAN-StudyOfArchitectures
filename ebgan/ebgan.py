@@ -14,7 +14,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch
 
-n_epochs = 200
+n_epochs = 20
 batch_size = 64
 lr = 0.0002
 b1 = 0.5
@@ -89,7 +89,7 @@ class Discriminator(nn.Module):
             nn.ReLU(inplace=True),
         )
         # Upsampling
-        self.up = nn.Sequential(nn.Upsample(scale_factor=2), nn.Conv2d(64, opt.channels, 3, 1, 1))
+        self.up = nn.Sequential(nn.Upsample(scale_factor=2), nn.Conv2d(64, self.channels, 3, 1, 1))
 
     def forward(self, img):
         out = self.down(img)
@@ -117,7 +117,7 @@ def train_EBGAN():
     discriminator.apply(weights_init_normal)
 
     # Configure data loader
-    os.makedirs("/../data/mnist", exist_ok=True)
+    os.makedirs("../data/mnist", exist_ok=True)
     dataloader = torch.utils.data.DataLoader(
         datasets.MNIST(
             "../data/mnist",

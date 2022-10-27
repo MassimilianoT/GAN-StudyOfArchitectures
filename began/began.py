@@ -193,7 +193,7 @@ def train_BEGAN():
             k = min(max(k, 0), 1)  # Constraint to interval [0, 1]
 
             # Update convergence metric
-            M = (d_loss_real + torch.abs(diff)).data[0]
+            M = (d_loss_real + torch.abs(diff)).data
 
             # --------------
             # Log Progress

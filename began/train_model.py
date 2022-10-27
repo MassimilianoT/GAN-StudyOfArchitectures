@@ -1,3 +1,3 @@
-import began
+from began import *
 
-began.train_BEGAN()
+train_BEGAN()
