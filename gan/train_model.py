@@ -1,3 +1,2 @@
-import gan
-
-gan.train_GAN()
+from gan import *
+train_GAN()

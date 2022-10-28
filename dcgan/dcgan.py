@@ -23,7 +23,7 @@ b2 = 0.999
 n_cpu = 8
 latent_dim = 100
 img_size = 32
-channels = 3
+channels = 1
 sample_interval = 400
 
 cuda = True if torch.cuda.is_available() else False

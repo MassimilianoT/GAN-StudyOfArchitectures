@@ -1,5 +1,6 @@
 import argparse
 import os
+from pkgutil import get_data
 import numpy as np
 import math
 
@@ -78,15 +79,49 @@ class Discriminator(nn.Module):
 
         return validity
 
-def train_GAN():
-    os.makedirs("images", exist_ok=True)
+# Metodo per determinare se usare CelebA o Mnist
+def get_dataloader(use_celebA=True, img_size=img_size):
+    if use_celebA:
+        os.makedirs("../data/celeba", exist_ok=True)
+        dataloader = torch.utils.data.DataLoader(
+            datasets.ImageFolder(
+                "../data/celeba",
+                transform=transforms.Compose([
+                    transforms.Resize(img_size),
+                    transforms.ToTensor(),
+                    transforms.Normalize([0.5], [0.5])
+                ])
+            ),
+            batch_size=batch_size,
+            shuffle=True,
+        )
+    else:
+        os.makedirs("../data/mnist", exist_ok=True)
+        dataloader = torch.utils.data.DataLoader(
+            datasets.MNIST(
+                "../data/mnist",
+                train=True,
+                download=True,
+                transform=transforms.Compose(
+                    [transforms.Resize(img_size), transforms.ToTensor(), transforms.Normalize([0.5], [0.5])]
+                ),
+            ),
+            batch_size=batch_size,
+            shuffle=True,
+        )
+    return dataloader
 
+def train_GAN(use_celebA=True):
+    os.makedirs("images", exist_ok=True)
+    if use_celebA:
+        channels = 3
+        img_shape = (channels, img_size, img_size)
     # Loss function
     adversarial_loss = torch.nn.BCELoss()
 
     # Initialize generator and discriminator
-    generator = Generator()
-    discriminator = Discriminator()
+    generator = Generator(img_shape=img_shape)
+    discriminator = Discriminator(img_shape=img_shape)
 
     if cuda:
         generator.cuda()
@@ -94,19 +129,7 @@ def train_GAN():
         adversarial_loss.cuda()
 
     # Configure data loader
-    os.makedirs("../data/mnist", exist_ok=True)
-    dataloader = torch.utils.data.DataLoader(
-        datasets.MNIST(
-            "../data/mnist",
-            train=True,
-            download=True,
-            transform=transforms.Compose(
-                [transforms.Resize(img_size), transforms.ToTensor(), transforms.Normalize([0.5], [0.5])]
-            ),
-        ),
-        batch_size=batch_size,
-        shuffle=True,
-    )
+    dataloader = get_dataloader(use_celebA=use_celebA, img_size=img_size)
 
     # Optimizers
     optimizer_G = torch.optim.Adam(generator.parameters(), lr=lr, betas=(b1, b2))
@@ -168,5 +191,8 @@ def train_GAN():
             batches_done = epoch * len(dataloader) + i
             if batches_done % sample_interval == 0:
                 save_image(gen_imgs.data[:25], "images/%d.png" % batches_done, nrow=5, normalize=True)
-
-    torch.save(generator.state_dict(), 'generator.pth')
+    if use_celebA:
+        name_net = "generator_celeba.pth"
+    else:
+        name_net = "generator_mnist.pth"
+    torch.save(generator.state_dict(), name_net)

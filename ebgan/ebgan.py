@@ -98,14 +98,49 @@ class Discriminator(nn.Module):
         out = self.up(out.view(out.size(0), 64, self.down_size, self.down_size))
         return out, embedding
 
-def train_EBGAN():
+# Metodo per determinare se usare CelebA o Mnist
+def get_dataloader(use_celebA=True, img_size=img_size):
+    if use_celebA:
+        os.makedirs("../data/celeba", exist_ok=True)
+        dataloader = torch.utils.data.DataLoader(
+            datasets.ImageFolder(
+                "../data/celeba",
+                transform=transforms.Compose([
+                    transforms.Resize(img_size),
+                    transforms.ToTensor(),
+                    transforms.Normalize([0.5], [0.5])
+                ])
+            ),
+            batch_size=batch_size,
+            shuffle=True,
+        )
+    else:
+        os.makedirs("../data/mnist", exist_ok=True)
+        dataloader = torch.utils.data.DataLoader(
+            datasets.MNIST(
+                "../data/mnist",
+                train=True,
+                download=True,
+                transform=transforms.Compose(
+                    [transforms.Resize(img_size), transforms.ToTensor(), transforms.Normalize([0.5], [0.5])]
+                ),
+            ),
+            batch_size=batch_size,
+            shuffle=True,
+        )
+    return dataloader
+
+
+def train_EBGAN(use_celebA = True, img_size = img_size):
     os.makedirs("images", exist_ok=True)
+    if use_celebA:
+        channels = 3
     # Reconstruction loss of AE
     pixelwise_loss = nn.MSELoss()
 
     # Initialize generator and discriminator
-    generator = Generator()
-    discriminator = Discriminator()
+    generator = Generator(img_size=img_size, channels=channels)
+    discriminator = Discriminator(img_size=img_size, channels=channels)
 
     if cuda:
         generator.cuda()
@@ -117,19 +152,7 @@ def train_EBGAN():
     discriminator.apply(weights_init_normal)
 
     # Configure data loader
-    os.makedirs("../data/mnist", exist_ok=True)
-    dataloader = torch.utils.data.DataLoader(
-        datasets.MNIST(
-            "../data/mnist",
-            train=True,
-            download=True,
-            transform=transforms.Compose(
-                [transforms.Resize(img_size), transforms.ToTensor(), transforms.Normalize([0.5], [0.5])]
-            ),
-        ),
-        batch_size=batch_size,
-        shuffle=True,
-    )
+    dataloader = get_dataloader(use_celebA=use_celebA, img_size=img_size)
 
     # Optimizers
     optimizer_G = torch.optim.Adam(generator.parameters(), lr=lr, betas=(b1, b2))
@@ -212,4 +235,8 @@ def train_EBGAN():
             batches_done = epoch * len(dataloader) + i
             if batches_done % sample_interval == 0:
                 save_image(gen_imgs.data[:25], "images/%d.png" % batches_done, nrow=5, normalize=True)
-    torch.save(generator.state_dict(), 'generator_ebgan.pth')
+    if use_celebA:
+        name_net = "generator_ebgan_celeba.pth"
+    else:
+        name_net = "generator_ebgan_mnist.pth"
+    torch.save(generator.state_dict(), name_net)
