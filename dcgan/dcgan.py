@@ -23,7 +23,7 @@ b2 = 0.999
 n_cpu = 8
 latent_dim = 100
 img_size = 32
-channels = 1
+channels = 3
 sample_interval = 400
 
 cuda = True if torch.cuda.is_available() else False
@@ -39,7 +39,7 @@ def weights_init_normal(m):
 
 
 class Generator(nn.Module):
-    def __init__(self, img_size = 32, latent_dim = 100, channels = 1):
+    def __init__(self, img_size=32, latent_dim=100, channels=1):
         super(Generator, self).__init__()
         self.img_size = img_size
         self.latent_dim = latent_dim
@@ -69,10 +69,11 @@ class Generator(nn.Module):
 
 
 class Discriminator(nn.Module):
-    def __init__(self, img_size =  32,channels = 1):
+    def __init__(self, img_size=32, channels=1):
         super(Discriminator, self).__init__()
         self.channels = channels
         self.img_size = img_size
+
         def discriminator_block(in_filters, out_filters, bn=True):
             block = [nn.Conv2d(in_filters, out_filters, 3, 2, 1), nn.LeakyReLU(0.2, inplace=True), nn.Dropout2d(0.25)]
             if bn:
@@ -97,15 +98,50 @@ class Discriminator(nn.Module):
 
         return validity
 
-def train_DCGAN():
-        
+# Metodo per determinare se usare CelebA o Mnist
+def get_dataloader(use_celebA=True, img_size=img_size):
+    if use_celebA:
+        os.makedirs("../data/celeba", exist_ok=True)
+        dataloader = torch.utils.data.DataLoader(
+            datasets.ImageFolder(
+                "../data/celeba",
+                transform=transforms.Compose([
+                    transforms.Resize(img_size),
+                    transforms.ToTensor(),
+                    transforms.Normalize([0.5], [0.5])
+                ])
+            ),
+            batch_size=batch_size,
+            shuffle=True,
+        )
+    else:
+        os.makedirs("../data/mnist", exist_ok=True)
+        dataloader = torch.utils.data.DataLoader(
+            datasets.MNIST(
+                "../data/mnist",
+                train=True,
+                download=True,
+                transform=transforms.Compose(
+                    [transforms.Resize(img_size), transforms.ToTensor(), transforms.Normalize([0.5], [0.5])]
+                ),
+            ),
+            batch_size=batch_size,
+            shuffle=True,
+        )
+    return dataloader
+
+
+def train_DCGAN(use_celebA=True, img_size = img_size):
     os.makedirs("images", exist_ok=True)
+    #RGB
+    if use_celebA:
+        channels = 3
     # Loss function
     adversarial_loss = torch.nn.BCELoss()
 
     # Initialize generator and discriminator
-    generator = Generator()
-    discriminator = Discriminator()
+    generator = Generator(img_size=img_size, channels=channels)
+    discriminator = Discriminator(img_size=img_size, channels=channels)
 
     if cuda:
         generator.cuda()
@@ -117,19 +153,7 @@ def train_DCGAN():
     discriminator.apply(weights_init_normal)
 
     # Configure data loader
-    os.makedirs("../data/mnist", exist_ok=True)
-    dataloader = torch.utils.data.DataLoader(
-        datasets.MNIST(
-            "../data/mnist",
-            train=True,
-            download=True,
-            transform=transforms.Compose(
-                [transforms.Resize(img_size), transforms.ToTensor(), transforms.Normalize([0.5], [0.5])]
-            ),
-        ),
-        batch_size=batch_size,
-        shuffle=True,
-    )
+    dataloader = get_dataloader(use_celebA=use_celebA)
 
     # Optimizers
     optimizer_G = torch.optim.Adam(generator.parameters(), lr=lr, betas=(b1, b2))
@@ -191,4 +215,8 @@ def train_DCGAN():
             batches_done = epoch * len(dataloader) + i
             if batches_done % sample_interval == 0:
                 save_image(gen_imgs.data[:25], "images/%d.png" % batches_done, nrow=5, normalize=True)
-    torch.save(generator.state_dict(), 'generator_dcgan.pth')
+    if use_celebA:
+        name_net = "generator_dcgan_celeba.pth"
+    else:
+        name_net = "generator_dcgan_mnist.pth"
+    torch.save(generator.state_dict(), name_net)
