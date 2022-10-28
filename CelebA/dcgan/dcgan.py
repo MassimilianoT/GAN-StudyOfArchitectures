@@ -23,7 +23,7 @@ b2 = 0.999
 n_cpu = 8
 latent_dim = 100
 img_size = 32
-channels = 1
+channels = 3
 sample_interval = 400
 
 cuda = True if torch.cuda.is_available() else False
@@ -118,17 +118,15 @@ def train_DCGAN():
     discriminator.apply(weights_init_normal)
 
     # Configure data loader
-    os.makedirs("../data/CelebA", exist_ok=True)
+    os.makedirs("../data/celeba", exist_ok=True)
     dataloader = torch.utils.data.DataLoader(
-        datasets.CelebA(
-            "../data/CelebA",
-            split='train',
-            download=True,
+        datasets.ImageFolder(
+            "../data/celeba",
             transform=transforms.Compose([
                 transforms.Resize(img_size),
                 transforms.ToTensor(),
                 transforms.Normalize([0.5], [0.5])
-            ]),
+            ])
         ),
         batch_size=batch_size,
         shuffle=True,
