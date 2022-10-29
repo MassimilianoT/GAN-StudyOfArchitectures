@@ -192,7 +192,7 @@ def train_GAN(use_celebA=True):
             if batches_done % sample_interval == 0:
                 save_image(gen_imgs.data[:25], "images/%d.png" % batches_done, nrow=5, normalize=True)
     if use_celebA:
-        name_net = "generator_celeba.pth"
+        name_net = "/models/generator_gan_celeba.pth"
     else:
-        name_net = "generator_mnist.pth"
+        name_net = "/models/generator_gan_mnist.pth"
     torch.save(generator.state_dict(), name_net)

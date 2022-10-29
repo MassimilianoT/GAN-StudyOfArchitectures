@@ -5,9 +5,17 @@ import numpy as np
 from torchvision.utils import save_image
 
 latent_dim = 100
-generator = Generator(channels=3)
-generator.load_state_dict(torch.load('generator_dcgan_celeba.pth'))
-generator.eval()
+usecelebA = True
+usecelebA = input('Inserire M per Mnist e C per CelebA (C default)') is 'C' 
+if usecelebA:
+    generator = Generator(channels=3)
+    generator.load_state_dict(torch.load('/models/generator_dcgan_celeba.pth'))
+    generator.eval()
+else:
+    generator = Generator()
+    generator.load_state_dict(torch.load('/models/generator_dcgan_mnist.pth'))
+    generator.eval()
+
 z = Variable(torch.FloatTensor(np.random.normal(0,1, (100, latent_dim))))
 gen_image = generator(z)
 save_image(gen_image.data[:25], 'generated_image.png', normalize=True, nrow=5)

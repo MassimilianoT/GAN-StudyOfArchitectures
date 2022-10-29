@@ -192,7 +192,7 @@ def train_wGAN(use_celebA = True):
                 save_image(gen_imgs.data[:25], "images/%d.png" % batches_done, nrow=5, normalize=True)
             batches_done += 1
     if use_celebA:
-        name_net = "generator_wGAN_celeba.pth"
+        name_net = "/models/generator_wGAN_celeba.pth"
     else:
-        name_net = "generator_wGAN_mnist.pth"
+        name_net = "/models/generator_wGAN_mnist.pth"
     torch.save(generator.state_dict(), name_net)   
