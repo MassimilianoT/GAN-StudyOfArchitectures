@@ -55,7 +55,7 @@ class Generator(nn.Module):
 
     def forward(self, z):
         img = self.model(z)
-        img = img.view(img.size(0), *img_shape)
+        img = img.view(img.size(0), *self.img_shape)
         return img
 
 
@@ -113,8 +113,10 @@ def get_dataloader(use_celebA=True, img_size=img_size):
 
 def train_GAN(use_celebA=True):
     os.makedirs("images", exist_ok=True)
+    global img_shape
     if use_celebA:
-        channels = 3
+        img_shape = (3, img_size, img_size)
+    else:
         img_shape = (channels, img_size, img_size)
     # Loss function
     adversarial_loss = torch.nn.BCELoss()
@@ -192,7 +194,7 @@ def train_GAN(use_celebA=True):
             if batches_done % sample_interval == 0:
                 save_image(gen_imgs.data[:25], "images/%d.png" % batches_done, nrow=5, normalize=True)
     if use_celebA:
-        name_net = "/models/generator_gan_celeba.pth"
+        name_net = "models/generator_gan_celeba.pth"
     else:
-        name_net = "/models/generator_gan_mnist.pth"
+        name_net = "models/generator_gan_mnist.pth"
     torch.save(generator.state_dict(), name_net)
