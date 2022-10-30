@@ -55,7 +55,7 @@ class Generator(nn.Module):
 
     def forward(self, z):
         img = self.model(z)
-        img = img.view(img.shape[0], *img_shape)
+        img = img.view(img.shape[0], *self.img_shape)
         return img
 
 
@@ -111,9 +111,9 @@ def get_dataloader(use_celebA=True, img_size=img_size):
 
 def train_wGAN(use_celebA = True):
     os.makedirs("images", exist_ok=True)
+    global img_shape
     if use_celebA:
-        channels = 3
-        img_shape = (channels, img_size, img_size)
+        img_shape = (3, img_size, img_size)
         
 
     # Initialize generator and discriminator
@@ -192,7 +192,7 @@ def train_wGAN(use_celebA = True):
                 save_image(gen_imgs.data[:25], "images/%d.png" % batches_done, nrow=5, normalize=True)
             batches_done += 1
     if use_celebA:
-        name_net = "/models/generator_wGAN_celeba.pth"
+        name_net = "models/generator_wgan_celeba.pth"
     else:
-        name_net = "/models/generator_wGAN_mnist.pth"
+        name_net = "models/generator_wgan_mnist.pth"
     torch.save(generator.state_dict(), name_net)   
