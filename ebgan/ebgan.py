@@ -21,7 +21,9 @@ b1 = 0.5
 b2 = 0.999
 n_cpu = 8
 latent_dim = 62
-img_size = 32
+img_size = 64
+#Vediamo come funziona con 64 invece che con 32
+
 channels = 1
 sample_interval = 400
 
@@ -236,7 +238,7 @@ def train_EBGAN(use_celebA = True, img_size = img_size):
             if batches_done % sample_interval == 0:
                 save_image(gen_imgs.data[:25], "images/%d.png" % batches_done, nrow=5, normalize=True)
     if use_celebA:
-        name_net = "/models/generator_ebgan_celeba.pth"
+        name_net = "models/generator_ebgan_celeba.pth"
     else:
-        name_net = "/models/generator_ebgan_mnist.pth"
+        name_net = "models/generator_ebgan_mnist.pth"
     torch.save(generator.state_dict(), name_net)
