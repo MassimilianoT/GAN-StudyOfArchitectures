@@ -233,7 +233,7 @@ def train_BEGAN(use_celebA = True, img_size = img_size):
             if batches_done % sample_interval == 0:
                 save_image(gen_imgs.data[:25], "images/%d.png" % batches_done, nrow=5, normalize=True)
     if use_celebA:
-        name_net = "/models/generator_began_celeba.pth"
+        name_net = "models/generator_began_celeba.pth"
     else:
-        name_net = "/models/generator_began_mnist.pth"
+        name_net = "models/generator_began_mnist.pth"
     torch.save(generator.state_dict(), name_net)
