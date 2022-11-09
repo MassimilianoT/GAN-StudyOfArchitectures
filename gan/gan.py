@@ -123,7 +123,7 @@ def train_GAN(use_celebA=True):
         os.makedirs("models/mnist", exist_ok=True)
         name_net = "models/mnist/generator_gan_mnist_"
     file_logger = open(name_net + 'log.txt', 'a')
-    file_logger.write('Epoch - D Loss - G Loss')
+    file_logger.write('Epoch - D Loss - G Loss\n')
 
     # Loss function
     adversarial_loss = torch.nn.BCELoss()
