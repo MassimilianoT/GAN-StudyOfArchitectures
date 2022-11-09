@@ -116,11 +116,13 @@ def train_GAN(use_celebA=True):
     global img_shape
     if use_celebA:
         img_shape = (3, img_size, img_size)
-        name_net = "models/generator_gan_celeba"
+        os.makedirs("models/celeba", exist_ok=True)
+        name_net = "models/celeba/generator_gan_celeba"
     else:
         img_shape = (channels, img_size, img_size)
-        name_net = "models/generator_gan_mnist"
-    file_logger = open(name_net + '_log.txt', 'a')
+        os.makedirs("models/mnist", exist_ok=True)
+        name_net = "models/mnist/generator_gan_mnist_"
+    file_logger = open(name_net + 'log.txt', 'a')
     file_logger.write('Epoch - D Loss - G Loss')
 
     # Loss function
@@ -194,8 +196,6 @@ def train_GAN(use_celebA=True):
                 "[Epoch %d/%d] [Batch %d/%d] [D loss: %f] [G loss: %f]"
                 % (epoch, n_epochs, i, len(dataloader), d_loss.item(), g_loss.item())
             )
-            file_logger.write( "%d %d %f %f \n" % (epoch, i, d_loss.item(), g_loss.item()))
-
             batches_done = epoch * len(dataloader) + i
             if batches_done % sample_interval == 0:
                 save_image(gen_imgs.data[:25], "images/%d.png" % batches_done, nrow=5, normalize=True)
