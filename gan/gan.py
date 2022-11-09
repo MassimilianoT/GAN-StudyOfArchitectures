@@ -15,7 +15,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch
 
-n_epochs = 200
+n_epochs = 1000
 batch_size = 64
 lr = 0.0002
 b1 = 0.5
@@ -116,8 +116,11 @@ def train_GAN(use_celebA=True):
     global img_shape
     if use_celebA:
         img_shape = (3, img_size, img_size)
+        name_net = "models/generator_gan_celeba"
     else:
         img_shape = (channels, img_size, img_size)
+        name_net = "models/generator_gan_mnist"
+
     # Loss function
     adversarial_loss = torch.nn.BCELoss()
 
@@ -193,8 +196,5 @@ def train_GAN(use_celebA=True):
             batches_done = epoch * len(dataloader) + i
             if batches_done % sample_interval == 0:
                 save_image(gen_imgs.data[:25], "images/%d.png" % batches_done, nrow=5, normalize=True)
-    if use_celebA:
-        name_net = "models/generator_gan_celeba.pth"
-    else:
-        name_net = "models/generator_gan_mnist.pth"
-    torch.save(generator.state_dict(), name_net)
+        if epoch % 100 == 0:
+            torch.save(generator.state_dict(), name_net+str(epoch)+'.pth')
