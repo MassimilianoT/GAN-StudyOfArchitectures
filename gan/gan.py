@@ -201,5 +201,7 @@ def train_GAN(use_celebA=True):
                 save_image(gen_imgs.data[:25], "images/%d.png" % batches_done, nrow=5, normalize=True)
         # Fine epoca
         file_logger.write( "%d %f %f \n" % (epoch, d_loss.item(), g_loss.item()))
+        file_logger.flush()
         if epoch % 100 == 0:
             torch.save(generator.state_dict(), name_net+str(epoch)+'.pth')
+    file_logger.close()
