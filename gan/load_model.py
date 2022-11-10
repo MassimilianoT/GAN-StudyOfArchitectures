@@ -15,7 +15,7 @@ if usecelebA:
     generator.eval()
 else:
     generator = Generator()
-    generator.load_state_dict(torch.load('models/generator_gan_mnist.pth'))
+    generator.load_state_dict(torch.load('models/mnist/generator_gan_mnist.pth'))
     generator.eval()
     
 z = Variable(torch.Tensor(np.random.normal(0, 1, (25, latent_dim))))

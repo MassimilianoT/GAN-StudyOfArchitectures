@@ -204,4 +204,5 @@ def train_GAN(use_celebA=True):
         file_logger.flush()
         if epoch % 100 == 0:
             torch.save(generator.state_dict(), name_net+str(epoch)+'.pth')
+    torch.save(generator.state_dict(),name_net + '.pth')
     file_logger.close()
