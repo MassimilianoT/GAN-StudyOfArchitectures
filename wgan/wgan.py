@@ -15,7 +15,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch
 
-n_epochs= 200
+n_epochs= 1000
 batch_size = 64
 lr = 0.00005
 n_cpu = 8 
@@ -114,7 +114,14 @@ def train_wGAN(use_celebA = True):
     global img_shape
     if use_celebA:
         img_shape = (3, img_size, img_size)
-        
+        os.makedirs("models/celeba", exist_ok=True)
+        name_net = "models/celeba/generator_gan_celeba"
+    else:
+        os.makedirs("models/mnist", exist_ok=True)
+        name_net = "models/mnist/generator_gan_mnist"
+    
+    file_logger = open(name_net + '_log.txt', 'a')
+    file_logger.write('Epoch - D Loss - G Loss\n')
 
     # Initialize generator and discriminator
     generator = Generator(img_shape=img_shape)
@@ -191,8 +198,9 @@ def train_wGAN(use_celebA = True):
             if batches_done % sample_interval == 0:
                 save_image(gen_imgs.data[:25], "images/%d.png" % batches_done, nrow=5, normalize=True)
             batches_done += 1
-    if use_celebA:
-        name_net = "models/generator_wgan_celeba.pth"
-    else:
-        name_net = "models/generator_wgan_mnist.pth"
-    torch.save(generator.state_dict(), name_net)   
+        file_logger.write('%d %f %f\n' % (epoch, loss_D.item(), loss_G.item()))
+        file_logger.flush()
+        if epoch % 100 == 0:
+            torch.save(generator.state_dict(), name_net + '_%d.pth' % epoch)
+    torch.save(generator.state_dict(), name_net + '.pth')
+    file_logger.close()
