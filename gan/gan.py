@@ -121,7 +121,7 @@ def train_GAN(use_celebA=True):
     else:
         img_shape = (channels, img_size, img_size)
         os.makedirs("models/mnist", exist_ok=True)
-        name_net = "models/mnist/generator_gan_mnist_"
+        name_net = "models/mnist/generator_gan_mnist"
     file_logger = open(name_net + 'log.txt', 'a')
     file_logger.write('Epoch - D Loss - G Loss\n')
 
@@ -203,6 +203,6 @@ def train_GAN(use_celebA=True):
         file_logger.write( "%d %f %f \n" % (epoch, d_loss.item(), g_loss.item()))
         file_logger.flush()
         if epoch % 100 == 0:
-            torch.save(generator.state_dict(), name_net+str(epoch)+'.pth')
+            torch.save(generator.state_dict(), name_net+ '_' + str(epoch)+'.pth')
     torch.save(generator.state_dict(),name_net + '.pth')
     file_logger.close()
