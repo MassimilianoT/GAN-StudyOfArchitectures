@@ -115,10 +115,10 @@ def train_wGAN(use_celebA = True):
     if use_celebA:
         img_shape = (3, img_size, img_size)
         os.makedirs("models/celeba", exist_ok=True)
-        name_net = "models/celeba/generator_gan_celeba"
+        name_net = "models/celeba/generator_wgan_celeba"
     else:
         os.makedirs("models/mnist", exist_ok=True)
-        name_net = "models/mnist/generator_gan_mnist"
+        name_net = "models/mnist/generator_wgan_mnist"
     
     file_logger = open(name_net + '_log.txt', 'a')
     file_logger.write('Epoch - D Loss - G Loss\n')

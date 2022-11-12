@@ -11,7 +11,7 @@ if usecelebA:
     global img_shape
     img_shape = (3,img_shape[1], img_shape[2])
     generator = Generator(img_shape=img_shape)
-    generator.load_state_dict(torch.load('models/generator_gan_celeba.pth'))
+    generator.load_state_dict(torch.load('models/celeba/generator_gan_celeba.pth'))
     generator.eval()
 else:
     generator = Generator()

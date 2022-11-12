@@ -12,11 +12,11 @@ if usecelebA:
     global img_shape
     img_shape = (3,img_shape[1], img_shape[2])
     generator = Generator(img_shape=img_shape)
-    generator.load_state_dict(torch.load('models/generator_wgan_celeba.pth'))
+    generator.load_state_dict(torch.load('models/celeba/generator_wgan_celeba.pth'))
     generator.eval()
 else:
     generator = Generator(img_shape=img_shape)
-    generator.load_state_dict(torch.load('models/generator_wgan_mnist.pth'))
+    generator.load_state_dict(torch.load('models/mnist/generator_wgan_mnist.pth'))
     generator.eval()
     
 z = Variable(torch.Tensor(np.random.normal(0, 1, (25, latent_dim))))
