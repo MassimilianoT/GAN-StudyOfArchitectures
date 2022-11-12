@@ -15,7 +15,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch
 
-n_epochs = 200
+n_epochs = 1000
 batch_size = 64
 lr = 0.0002
 b1 = 0.5
@@ -136,6 +136,14 @@ def train_DCGAN(use_celebA=True, img_size = img_size):
     #RGB
     if use_celebA:
         channels = 3
+        os.makedirs("models/celeba", exist_ok=True)
+        name_net = "models/celeba/generator_gan_celeba"
+    else:
+        os.makedirs("models/mnist", exist_ok=True)
+        name_net = "models/mnist/generator_gan_mnist"
+    file_logger = open(name_net + '_log.txt', 'a')
+    file_logger.write('Epoch - D Loss - G Loss\n')
+    
     # Loss function
     adversarial_loss = torch.nn.BCELoss()
 
@@ -211,12 +219,13 @@ def train_DCGAN(use_celebA=True, img_size = img_size):
                 "[Epoch %d/%d] [Batch %d/%d] [D loss: %f] [G loss: %f]"
                 % (epoch, n_epochs, i, len(dataloader), d_loss.item(), g_loss.item())
             )
-
             batches_done = epoch * len(dataloader) + i
             if batches_done % sample_interval == 0:
                 save_image(gen_imgs.data[:25], "images/%d.png" % batches_done, nrow=5, normalize=True)
-    if use_celebA:
-        name_net = "/models/generator_dcgan_celeba.pth"
-    else:
-        name_net = "/models/generator_dcgan_mnist.pth"
-    torch.save(generator.state_dict(), name_net)
+            
+            file_logger.write('%d %f %f\n' % (epoch, d_loss.item(), g_loss.item()))
+            file_logger.flush()
+            if epoch % 100 == 0:
+                torch.save(generator.state_dict(), name_net + '_%d.pth' % epoch)
+    torch.save(generator.state_dict(), name_net + '.pth')
+    file_logger.close()
