@@ -137,11 +137,11 @@ def train_DCGAN(use_celebA=True, img_size = img_size):
     if use_celebA:
         channels = 3
         os.makedirs("models/celeba", exist_ok=True)
-        name_net = "models/celeba/generator_gan_celeba"
+        name_net = "models/celeba/generator_dcgan_celeba"
     else:
         channels = 1
         os.makedirs("models/mnist", exist_ok=True)
-        name_net = "models/mnist/generator_gan_mnist"
+        name_net = "models/mnist/generator_dcgan_mnist"
     file_logger = open(name_net + '_log.txt', 'a')
     file_logger.write('Epoch - D Loss - G Loss\n')
     
