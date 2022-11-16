@@ -10,11 +10,11 @@ usecelebA = True
 usecelebA = input('Inserire M per Mnist e C per CelebA (C default)') is 'C' 
 if usecelebA:
     generator = Generator(channels=3)
-    generator.load_state_dict(torch.load('models/generator_began_celeba.pth'))
+    generator.load_state_dict(torch.load('models/mnist/generator_began_celeba.pth'))
     generator.eval()
 else:
     generator = Generator()
-    generator.load_state_dict(torch.load('models/generator_began_mnist.pth'))
+    generator.load_state_dict(torch.load('models/celeba/generator_began_mnist.pth'))
     generator.eval()
 z = Variable(torch.FloatTensor(np.random.normal(0,1, (25, latent_dim))))
 gen_image = generator(z)
