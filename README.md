@@ -1,17 +1,103 @@
 # GAN-StudyOfArchitectures
+
 Progetto per il corso "Machine Learning and Data Mining" per la laurea magistrale in Ingegneria Informatica all'Università degli studi di Brescia.
-## Overview
-In questo progetto abbiamo analizzato varie architetture per le reti GAN (Generative Adversarial Networks): le reti GAN appartengono alle reti generative, modelli di deep learning il cui scopo è produrre nuove istanze di dati che somiglino ad una distribuzione nota di dati. Le reti GAN risolvono questa task mediante un allenamento simultaneo di due modelli, il generatore G e il discriminatore D.
-Le differenze nei vari modelli analizzati stanno nel modo in cui le reti sono allenate, nella loro architettura, negli ottimizzatori utilizzati e nella funzione di loss associata ai due modelli. 
-## Observations
-Di seguito si mostrano i risultati dei vari modelli allenati sui dataset Mnist e CelebA
-### - Mnist
-| ![GAN](./immagini%20generate%20dai%20%20modelli/Mnist/generated_image_gan.png) | ![WGAN](./immagini%20generate%20dai%20%20modelli/Mnist/generated_image_wgan.png) | ![BEGAN](./immagini%20generate%20dai%20%20modelli/Mnist/generated_image_began.png) | ![DCGAN](./immagini%20generate%20dai%20%20modelli/Mnist/generated_image_dcgan.png) | ![EBGAN](./immagini%20generate%20dai%20%20modelli/Mnist/generated_image_ebgan.png)
-|:--:|:--:|:--:|:--:|:--:| 
-| *GAN* | *WGAN* | *BEGAN* | *DCGAN* | *EBGAN* | 
 
-### - CelebA
-| ![GAN](./immagini%20generate%20dai%20%20modelli/CelebA/generated_image_gan.png) | ![WGAN](./immagini%20generate%20dai%20%20modelli/CelebA/generated_image_wgan.png) | ![BEGAN](./immagini%20generate%20dai%20%20modelli/CelebA/generated_image_began.png) | ![DCGAN](./immagini%20generate%20dai%20%20modelli/CelebA/generated_image_dcgan.png) | ![EBGAN](./immagini%20generate%20dai%20%20modelli/CelebA/generated_image_ebgan.png)
-|:--:|:--:|:--:|:--:|:--:| 
-| *GAN* | *WGAN* | *BEGAN* | *DCGAN* | *EBGAN* | 
+## Indice
 
+ - [Introduzione](#introduzione)
+	 - [Modelli Generativi](#modelli-generativi)
+	 - [Rete Discriminante](#rete-discriminante)
+ - [Architetture](#architetture)
+	 - [BEGAN](#began)
+	 - [DCGAN](#dcgan)
+	 - [EBGAN](#ebgan)
+	 - [GAN](#gan)
+	 - [WGAN](#wgan)
+ - [Risultati](#risultati)
+	 - [MNIST](#mnist)
+	 - [CelebA](#celeba)
+
+## Introduzione
+
+Il progetto in questione aveva l'obiettivo di mettere a confronto diverse architetture di reti GAN per valutare le loro performance su due diversi dataset (**MNIST** e **CelebA**). Le architetture che abbiamo testato sono:
+
+ - **BEGAN** (_Boundary Equilibrium Generative Adversarial Networks_)
+ - **DCGAN** (_Deep Convolutional Generative Adversarial Network_)
+ - **EBGAN** (_Energy-based Generative Adversarial Network_)
+ - **GAN** (_Generative Adversarial Networks_)
+ - **WGAN** (_Wasserstein Generative Adversarial Networks_)
+
+Nei capitoli di questo documento andremo a descrivere ciò che si intende per rete generativa e come differiscono le GAN da questa definizione iniziale, specificandosi poi nelle diverse architetture (ognuna con le proprie differenze rispetto alla rete GAN base).
+
+### Modelli Generativi
+
+L'obiettivo dei modelli generativi è imparare un modello che rappresenta la distribuzione dei dati di training che gli vengono dati in input
+
+## Architetture
+
+### BEGAN
+
+_BEGAN: Boundary Equilibrium Generative Adversarial Networks_
+
+#### Autori
+
+David Berthelot, Thomas Schumm, Luke Metz
+
+#### Descrizione
+
+### DCGAN
+
+_Deep Convolutional Generative Adversarial Network_
+
+#### Autori
+
+Alec Radford, Luke Metz, Soumith Chintala
+
+#### Descrizione
+
+### EBGAN
+
+_Energy-based Generative Adversarial Network_
+
+#### Autori
+
+Junbo Zhao, Michael Mathieu, Yann LeCun
+
+#### Descrizione
+
+### GAN
+
+_Generative Adversarial Network_
+
+#### Autori
+
+Ian J. Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley, Sherjil Ozair, Aaron Courville, Yoshua Bengio
+
+#### Descrizione
+
+### WGAN
+
+_Wasserstein Generative Adversarial Network_
+
+#### Autori
+
+Martin Arjovsky, Soumith Chintala, Léon Bottou
+
+#### Descrizione
+
+## Risultati
+
+Di seguito si mostrano i risultati dei vari modelli allenati sui dataset MNIST e CelebA
+
+### MNIST
+|![CIAO](https://upload.wikimedia.org/wikipedia/commons/6/6f/Rete_generativa_avversaria.png) | ![Ciao](https://upload.wikimedia.org/wikipedia/commons/6/6f/Rete_generativa_avversaria.png) |![Ciao](https://upload.wikimedia.org/wikipedia/commons/6/6f/Rete_generativa_avversaria.png)|![Ciao](https://upload.wikimedia.org/wikipedia/commons/6/6f/Rete_generativa_avversaria.png)|![Ciao](https://upload.wikimedia.org/wikipedia/commons/6/6f/Rete_generativa_avversaria.png)|
+|--|--|--|--|--|
+|***GAN***|***WGAN***|***BEGAN***|***DCGAN***|***EBGAN***|
+
+### CelebA
+|![CIAO](https://upload.wikimedia.org/wikipedia/commons/6/6f/Rete_generativa_avversaria.png) | ![Ciao](https://upload.wikimedia.org/wikipedia/commons/6/6f/Rete_generativa_avversaria.png) |![Ciao](https://upload.wikimedia.org/wikipedia/commons/6/6f/Rete_generativa_avversaria.png)|![Ciao](https://upload.wikimedia.org/wikipedia/commons/6/6f/Rete_generativa_avversaria.png)|![Ciao](https://upload.wikimedia.org/wikipedia/commons/6/6f/Rete_generativa_avversaria.png)|
+|--|--|--|--|--|
+|***GAN***|***WGAN***|***BEGAN***|***DCGAN***|***EBGAN***|
+
+
+&copy; Glisenti Mirko, Tummolo Massimiliano - 2022
