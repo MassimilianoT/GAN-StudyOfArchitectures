@@ -86,9 +86,11 @@ Infine, se l'addestramento del generatore si conclude per il meglio, il discrimi
 ![GAN fine](./assets/good_gan.jpg)
 Qui riportiamo un diagramma dell'intero sistema
 
+$\equiv$
+
 ```mermaid
 graph LR
-A[Input randomico]
+A["Input randomico (x  N(µ,σ))"]
 B[Generatore]
 C[Immagine Generata]
 D[Dataset Immagini Reali]
