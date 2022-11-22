@@ -79,11 +79,11 @@ Una rete generativa avversaria (GAN) si compone di due parti:
 - Il **discriminatore** impara a distinguere i dati falsi generati dal generatore da dati reali provenienti dal dataset. Il discriminatore penalizza il generatore quando produce dei risultati non plausibili.
 
 Quando l'allenamento è all'inizio, il generatore produce dati ovviamente falsi e quindi il discriminatore impara velocemente a dire che quei dati sono falsi:
-![GAN inizio](./assets/bad_gan.svg)
+![GAN inizio](./assets/bad_gan.jpg)
 Man mano che l'addestramento procede, il generatore si avvicina alla produzione di output che possono ingannare il discriminatore:
-![GAN durante](./assets/ok_gan.svg)
+![GAN durante](./assets/ok_gan.jpg)
 Infine, se l'addestramento del generatore si conclude per il meglio, il discriminatore peggiora nella comprensione della differenza tra reale e falso. Inizia a classificare i dati falsi come reali e la sua accuratezza diminuisce.
-![GAN fine](./assets/good_gan.svg)
+![GAN fine](./assets/good_gan.jpg)
 Qui riportiamo un diagramma dell'intero sistema
 
 ```mermaid
