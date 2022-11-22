@@ -90,7 +90,7 @@ $\equiv$
 
 ```mermaid
 graph LR
-A["Input randomico (x  N(µ,σ))"]
+A["Input randomico (x $\equiv$ N(µ,σ))"]
 B[Generatore]
 C[Immagine Generata]
 D[Dataset Immagini Reali]
