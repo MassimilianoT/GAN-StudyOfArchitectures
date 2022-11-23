@@ -277,7 +277,7 @@ Le loss del generatore e del discriminatore sono diverse alla fine, nonostante d
 
 Nel paper che ha introdotto le GAN, il generatore prova a minimizzare la funzione seguente mentre il discriminatore prova a massimizzarla:
 
-$E_{x}[log(D(x))] + E_{z}[log(1 - D(G(z)))]$
+<p align="center" font-size="15">$E_{x}[log(D(x))] + E_{z}[log(1 - D(G(z)))]$</p>
 
 ## Architetture
 
