@@ -32,7 +32,17 @@ Progetto per il corso "Machine Learning and Data Mining" per la laurea magistral
     * [Mode Collapse](#mode-collapse)
       * [Tentativi di rimedio](#tentativi-di-rimedio)
     * [Mancata convergenza](#mancata-convergenza)
-* [Architetture](#architetture)
+      * [Tentativi di rimedio](#tentativi-di-rimedio)
+* [Variazioni alle GAN](#variazioni-alle-gan)
+  * [Progressive GAN](#progressive-gan)
+  * [Conditional GAN](#conditional-gan)
+  * [Image-to-Image Translation](#image-to-image-translation)
+  * [CycleGAN](#cyclegan)
+  * [Text-to-Image Synthesis](#text-to-image-synthesis)
+  * [Super-resolution](#super-resolution)
+  * [Face Inpainting](#face-inpainting)
+  * [Text-to-Speech](#text-to-speech)
+* [Architetture prese in esame](#architetture-prese-in-esame)
   * [BEGAN](#began)
     * [Autori](#autori)
     * [Descrizione](#descrizione)
@@ -460,6 +470,14 @@ Data l'immagine sfocata, la GAN produce l'immagine più dettagliata di destra:
 
 L'immagine generata dalla GAN somiglia molto all'immagine originale ma se osservi più da vicino la fascia sulla fronte noterai che la GAN non ha riprodotto il pattern dall'originale.
 Al contrario, ha creato il suo pattern plausibile per sostituire quello cancellato dal sotto campionamento.
+
+### Face Inpainting
+
+
+
+### Text-to-Speech
+
+
 
 ## Architetture prese in esame
 
