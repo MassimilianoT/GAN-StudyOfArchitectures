@@ -86,8 +86,6 @@ Infine, se l'addestramento del generatore si conclude per il meglio, il discrimi
 ![GAN fine](./assets/good_gan.jpg)
 Qui riportiamo un diagramma dell'intero sistema
 
-$\sim$
-
 ```mermaid
 graph LR
 A[Input randomico <br> con distribuzione <br> normale tra 0 e 1]
