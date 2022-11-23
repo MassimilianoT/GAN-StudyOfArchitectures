@@ -448,6 +448,19 @@ Ad esempio, l'immagine del fiore qui sotto è stata prodotta fornendo una descri
 
 Notare che in questo sistema la GAN può produrre solo immagini da un piccoli set di classi.
 
+### Super-resolution
+
+Le super-resolution GAN aumentano la risoluzione delle immagini, aggiungendo dettagli dove necessario per riempire aree sfocate.
+Ad esempio, l'immagine sfocata centrale riportata qui sotto è un sotto campionamento dell'immagine originale a sinistra. 
+Data l'immagine sfocata, la GAN produce l'immagine più dettagliata di destra:
+
+| ![Original](./assets/superres_orig.png) | ![Blurred](./assets/superres_blurry.png) | ![GAN](./assets/superres_gan.png) |
+|:---------------------------------------:|:----------------------------------------:|:---------------------------------:|
+|             ***Original***              |              ***Blurred***               |      ***Restored with GAN***      |
+
+L'immagine generata dalla GAN somiglia molto all'immagine originale ma se osservi più da vicino la fascia sulla fronte noterai che la GAN non ha riprodotto il pattern dall'originale.
+Al contrario, ha creato il suo pattern plausibile per sostituire quello cancellato dal sotto campionamento.
+
 ## Architetture prese in esame
 
 ### BEGAN
