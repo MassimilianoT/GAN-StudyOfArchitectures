@@ -277,7 +277,19 @@ Le loss del generatore e del discriminatore sono diverse alla fine, nonostante d
 
 Nel paper che ha introdotto le GAN, il generatore prova a minimizzare la funzione seguente mentre il discriminatore prova a massimizzarla:
 
-<p align="center" font-size="3em !important">$E_{x}[log(D(x))] + E_{z}[log(1 - D(G(z)))]$</p>
+<p align="center">$E_{x}[log(D(x))] + E_{z}[log(1 - D(G(z)))]$</p>
+
+In questa funzione:
+- $D(x)$ è la stima della probabilità che l'istanza reale x sia reale, data dal discriminatore.
+- $E_{x}$ è il valore atteso per tutte le istanze di dati reali.
+- $G(z)$ è l'output del generatore dato un certo rumore z.
+- $D(G(z))$ è la stima della probabilità che l'istanza fake sia reale, data dal discriminatore.
+- $E_{z}$ è il valore atteso per tutti gli input randomici nel generatore (in effetti, il valore atteso per tutte le istanze fake generate G(z)).
+- La formula deriva dalla Cross-Entropy tra distribuzioni reali e generate.
+
+Il generatore non può influenzare direttamente il termine $log(D(x))$ nella funzione; quindi, per il generatore, minimizzare la loss equivale a minimizzare $log(1 - D(G(z)))$.
+
+
 
 ## Architetture
 
