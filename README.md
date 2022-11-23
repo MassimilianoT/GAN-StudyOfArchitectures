@@ -88,7 +88,7 @@ Qui riportiamo un diagramma dell'intero sistema
 
 ```mermaid
 graph LR
-A[Input randomico <br> x $\sim$ N$(1,0)$]
+A[Input randomico <br> x $\sim$ N 1,0]
 B[Generatore]
 C[Immagine<br>Generata]
 D[Dataset<br>Immagini Reali]
