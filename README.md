@@ -40,11 +40,11 @@ Progetto per il corso "Machine Learning and Data Mining" per la laurea magistral
   * [Face Inpainting](#face-inpainting)
   * [Text-to-Speech](#text-to-speech)
 * [Architetture prese in esame](#architetture-prese-in-esame)
+  * [GAN](#gan)
+  * [WGAN](#wgan)
   * [BEGAN](#began)
   * [DCGAN](#dcgan)
   * [EBGAN](#ebgan)
-  * [GAN](#gan)
-  * [WGAN](#wgan)
 * [Risultati](#risultati)
   * [MNIST](#mnist)
   * [CelebA](#celeba)
@@ -474,57 +474,6 @@ Ad esempio, alcuni ricercatori hanno usato le GAN per produrre un discorso parla
 
 ## Architetture prese in esame
 
-### BEGAN
-
-_BEGAN: Boundary Equilibrium Generative Adversarial Networks_
-
-#### Autori
-
-David Berthelot, Thomas Schumm, Luke Metz
-
-#### Abstract
-
-*Proponiamo un nuovo metodo di rafforzamento dell'equilibrio abbinato a una funzione di loss derivata dalla distanza di Wasserstein per l'allenamento di GAN basate su auto-encoder.
-Questo metodo bilancia il generatore e il discriminatore durante l'allenamento.
-In aggiunta, fornisce una nuova misura di convergenza approssimata, allenamento veloce e stabile e alta qualità delle immagini.
-Abbiamo inoltre derivato un modo per controllare il trade-off tra diversità delle immagini e qualità delle stesse.
-Ci concentriamo sull'attività di generazione delle immagini, stabilendo una nuova pietra miliare nella qualità visiva, anche a risoluzioni più elevate.
-Ciò si ottiene utilizzando un'architettura del modello relativamente semplice e una procedura di addestramento standard.*
-
-### DCGAN
-
-_Deep Convolutional Generative Adversarial Network_
-
-#### Autori
-
-Alec Radford, Luke Metz, Soumith Chintala
-
-#### Abstract
-
-*Negli ultimi anni, l'apprendimento supervisionato con le reti convoluzionali (CNN) ha visto un'enorme adozione nelle applicazioni di visione artificiale.
-A confronto, l'apprendimento non supervisionato con le CNN ha ricevuto meno attenzione.
-In questo lavoro speriamo di contribuire a colmare il divario tra il successo delle CNN per l'apprendimento supervisionato e l'apprendimento non supervisionato.
-Introduciamo una classe di CNN chiamate Deep Convolutional GAN (DCGAN), che hanno determinati vincoli architetturali e dimostriamo che sono un valido candidato per l'apprendimento non supervisionato.
-Addestrandoci su vari set di dati di immagini, mostriamo prove convincenti che la nostra coppia di reti convoluzionali avversarie apprende una gerarchia di rappresentazioni dalle parti dell'oggetto alle scene sia nel generatore che nel discriminatore.
-Inoltre, utilizziamo le funzionalità apprese per nuovi compiti, dimostrando la loro applicabilità come rappresentazioni di immagini generali.*
-
-### EBGAN
-
-_Energy-based Generative Adversarial Network_
-
-#### Autori
-
-Junbo Zhao, Michael Mathieu, Yann LeCun
-
-#### Abstract
-
-*Introduciamo il modello "Energy-based Generative Adversarial Network" (EBGAN) che vede il discriminatore come una funzione energetica che attribuisce basse energie alle regioni vicine al collettore di dati ed energie più elevate ad altre regioni.
-Simile ai GAN probabilistici, un generatore è visto come addestrato per produrre campioni contrastanti con energie minime, mentre il discriminatore è addestrato ad assegnare energie elevate a questi campioni generati.
-Considerare il discriminatore come una funzione energetica consente di utilizzare un'ampia varietà di architetture e loss function oltre al solito classificatore binario con output logistico.
-Tra questi, mostriamo un'istanza del framework EBGAN che utilizza un'architettura di auto-encoder, con l'energia che è l'errore di ricostruzione, al posto del discriminatore.
-Mostriamo che questa forma di EBGAN mostra un comportamento più stabile rispetto ai normali GAN durante l'allenamento.
-Mostriamo anche che un'architettura a scala singola può essere addestrata per generare immagini ad alta risoluzione.*
-
 ### GAN
 
 _Generative Adversarial Network_
@@ -542,6 +491,35 @@ Nello spazio delle funzioni arbitrarie G e D esiste un'unica soluzione, con G ch
 Nel caso in cui le reti del generatore e del discriminatore siano definite da percettroni multistrato, l'intero sistema può essere addestrato con la backpropagation.
 Non sono necessarie catene di Markov o reti di inferenza approssimative srotolate durante l'addestramento o la generazione di campioni.
 Gli esperimenti dimostrano il potenziale del framework attraverso la valutazione qualitativa e quantitativa dei campioni generati.*
+
+#### Descrizione
+
+
+
+#### Esempio di run
+
+```
+$ python3 load_model.py
+
+-------------------------
+Loading a GAN Models
+-------------------------
+1. Load a GAN
+2. Load a WGAN
+3. Load a BEGAN
+4. Load a DCGAN
+5. Load a EBGAN
+
+Choose: 1
+
+-------------------------
+Loading which dataset
+-------------------------
+1. Load MNIST
+2. Load CelebA
+
+Choose: ...
+```
 
 ### WGAN
 
@@ -596,6 +574,169 @@ La giustificazione teorica per le WGAN richiede che i pesi all'interno delle GAN
 Le WGAN sono meno vulnerabili al blocco rispetto alle GAN basate su minimax ed evitano problemi con vanishing gradients.
 La earth mover distance ha anche il vantaggio di essere una vera metrica: una misura della distanza in uno spazio di distribuzioni di probabilità.
 La cross entropy non è una metrica in questo senso.
+
+#### Esempio di run
+
+```
+$ python3 load_model.py
+
+-------------------------
+Loading a GAN Models
+-------------------------
+1. Load a GAN
+2. Load a WGAN
+3. Load a BEGAN
+4. Load a DCGAN
+5. Load a EBGAN
+
+Choose: 2
+
+-------------------------
+Loading which dataset
+-------------------------
+1. Load MNIST
+2. Load CelebA
+
+Choose: ...
+```
+
+### BEGAN
+
+_BEGAN: Boundary Equilibrium Generative Adversarial Networks_
+
+#### Autori
+
+David Berthelot, Thomas Schumm, Luke Metz
+
+#### Abstract
+
+*Proponiamo un nuovo metodo di rafforzamento dell'equilibrio abbinato a una funzione di loss derivata dalla distanza di Wasserstein per l'allenamento di GAN basate su auto-encoder.
+Questo metodo bilancia il generatore e il discriminatore durante l'allenamento.
+In aggiunta, fornisce una nuova misura di convergenza approssimata, allenamento veloce e stabile e alta qualità delle immagini.
+Abbiamo inoltre derivato un modo per controllare il trade-off tra diversità delle immagini e qualità delle stesse.
+Ci concentriamo sull'attività di generazione delle immagini, stabilendo una nuova pietra miliare nella qualità visiva, anche a risoluzioni più elevate.
+Ciò si ottiene utilizzando un'architettura del modello relativamente semplice e una procedura di addestramento standard.*
+
+#### Descrizione
+
+
+
+#### Esempio di run
+
+```
+$ python3 load_model.py
+
+-------------------------
+Loading a GAN Models
+-------------------------
+1. Load a GAN
+2. Load a WGAN
+3. Load a BEGAN
+4. Load a DCGAN
+5. Load a EBGAN
+
+Choose: 3
+
+-------------------------
+Loading which dataset
+-------------------------
+1. Load MNIST
+2. Load CelebA
+
+Choose: ...
+```
+
+### DCGAN
+
+_Deep Convolutional Generative Adversarial Network_
+
+#### Autori
+
+Alec Radford, Luke Metz, Soumith Chintala
+
+#### Abstract
+
+*Negli ultimi anni, l'apprendimento supervisionato con le reti convoluzionali (CNN) ha visto un'enorme adozione nelle applicazioni di visione artificiale.
+A confronto, l'apprendimento non supervisionato con le CNN ha ricevuto meno attenzione.
+In questo lavoro speriamo di contribuire a colmare il divario tra il successo delle CNN per l'apprendimento supervisionato e l'apprendimento non supervisionato.
+Introduciamo una classe di CNN chiamate Deep Convolutional GAN (DCGAN), che hanno determinati vincoli architetturali e dimostriamo che sono un valido candidato per l'apprendimento non supervisionato.
+Addestrandoci su vari set di dati di immagini, mostriamo prove convincenti che la nostra coppia di reti convoluzionali avversarie apprende una gerarchia di rappresentazioni dalle parti dell'oggetto alle scene sia nel generatore che nel discriminatore.
+Inoltre, utilizziamo le funzionalità apprese per nuovi compiti, dimostrando la loro applicabilità come rappresentazioni di immagini generali.*
+
+#### Descrizione
+
+
+
+#### Esempio di run
+
+```
+$ python3 load_model.py
+
+-------------------------
+Loading a GAN Models
+-------------------------
+1. Load a GAN
+2. Load a WGAN
+3. Load a BEGAN
+4. Load a DCGAN
+5. Load a EBGAN
+
+Choose: 4
+
+-------------------------
+Loading which dataset
+-------------------------
+1. Load MNIST
+2. Load CelebA
+
+Choose: ...
+```
+
+### EBGAN
+
+_Energy-based Generative Adversarial Network_
+
+#### Autori
+
+Junbo Zhao, Michael Mathieu, Yann LeCun
+
+#### Abstract
+
+*Introduciamo il modello "Energy-based Generative Adversarial Network" (EBGAN) che vede il discriminatore come una funzione energetica che attribuisce basse energie alle regioni vicine al collettore di dati ed energie più elevate ad altre regioni.
+Simile ai GAN probabilistici, un generatore è visto come addestrato per produrre campioni contrastanti con energie minime, mentre il discriminatore è addestrato ad assegnare energie elevate a questi campioni generati.
+Considerare il discriminatore come una funzione energetica consente di utilizzare un'ampia varietà di architetture e loss function oltre al solito classificatore binario con output logistico.
+Tra questi, mostriamo un'istanza del framework EBGAN che utilizza un'architettura di auto-encoder, con l'energia che è l'errore di ricostruzione, al posto del discriminatore.
+Mostriamo che questa forma di EBGAN mostra un comportamento più stabile rispetto ai normali GAN durante l'allenamento.
+Mostriamo anche che un'architettura a scala singola può essere addestrata per generare immagini ad alta risoluzione.*
+
+#### Descrizione
+
+
+
+#### Esempio di run
+
+```
+$ python3 load_model.py
+
+-------------------------
+Loading a GAN Models
+-------------------------
+1. Load a GAN
+2. Load a WGAN
+3. Load a BEGAN
+4. Load a DCGAN
+5. Load a EBGAN
+
+Choose: 5
+
+-------------------------
+Loading which dataset
+-------------------------
+1. Load MNIST
+2. Load CelebA
+
+Choose: ...
+```
 
 ## Risultati
 

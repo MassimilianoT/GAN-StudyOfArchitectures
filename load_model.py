@@ -125,48 +125,23 @@ def dataset_menu():
 
 
 models_menu()
-scelta = int(input("Scegli: "))
-print("------------------------")
-
-if scelta == 1:
-    dataset_menu()
-    scelta2 = int(input("Scegli: "))
-    print("------------------------")
-    if scelta2 == 1 or scelta2 == 2:
-        gan(scelta2)
-    else:
-        print('errore')
-elif scelta == 2:
-    dataset_menu()
-    scelta2 = int(input("Scegli: "))
-    print("------------------------")
-    if scelta2 == 1 or scelta2 == 2:
-        wgan(scelta2)
-    else:
-        print('errore')
-elif scelta == 3:
-    dataset_menu()
-    scelta2 = int(input("Scegli: "))
-    print("------------------------")
-    if scelta2 == 1 or scelta2 == 2:
-        began(scelta2)
-    else:
-        print('errore')
-elif scelta == 4:
-    dataset_menu()
-    scelta2 = int(input("Scegli: "))
-    print("------------------------")
-    if scelta2 == 1 or scelta2 == 2:
-        dcgan(scelta2)
-    else:
-        print('errore')
-elif scelta == 5:
-    dataset_menu()
-    scelta2 = int(input("Scegli: "))
-    print("------------------------")
-    if scelta2 == 1 or scelta2 == 2:
-        ebgan(scelta2)
-    else:
-        print('errore')
+scelta = int(input("Choose: "))
+if scelta != 1 and scelta != 2 and scelta != 3 and scelta != 4 and scelta != 5:
+    print('errore')
 else:
-    print('error')
+    dataset_menu()
+    scelta2 = int(input("Choose: "))
+    print()
+    if scelta2 != 1 and scelta2 != 2:
+        print('errore')
+    else:
+        if scelta == 1:
+            gan(scelta2)
+        elif scelta == 2:
+            wgan(scelta2)
+        elif scelta == 3:
+            began(scelta2)
+        elif scelta == 4:
+            dcgan(scelta2)
+        else:
+            ebgan(scelta2)
