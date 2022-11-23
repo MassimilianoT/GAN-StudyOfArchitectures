@@ -28,11 +28,8 @@ Progetto per il corso "Machine Learning and Data Mining" per la laurea magistral
 * [GAN nel mondo reale](#gan-nel-mondo-reale)
   * [Problemi comuni](#problemi-comuni)
     * [Vanishing Gradients](#vanishing-gradients)
-      * [Tentativi di rimedio](#tentativi-di-rimedio)
     * [Mode Collapse](#mode-collapse)
-      * [Tentativi di rimedio](#tentativi-di-rimedio)
     * [Mancata convergenza](#mancata-convergenza)
-      * [Tentativi di rimedio](#tentativi-di-rimedio)
 * [Variazioni alle GAN](#variazioni-alle-gan)
   * [Progressive GAN](#progressive-gan)
   * [Conditional GAN](#conditional-gan)
@@ -44,20 +41,10 @@ Progetto per il corso "Machine Learning and Data Mining" per la laurea magistral
   * [Text-to-Speech](#text-to-speech)
 * [Architetture prese in esame](#architetture-prese-in-esame)
   * [BEGAN](#began)
-    * [Autori](#autori)
-    * [Descrizione](#descrizione)
   * [DCGAN](#dcgan)
-    * [Autori](#autori)
-    * [Descrizione](#descrizione)
   * [EBGAN](#ebgan)
-    * [Autori](#autori)
-    * [Descrizione](#descrizione)
   * [GAN](#gan)
-    * [Autori](#autori)
-    * [Descrizione](#descrizione)
   * [WGAN](#wgan)
-    * [Autori](#autori)
-    * [Descrizione](#descrizione)
 * [Risultati](#risultati)
   * [MNIST](#mnist)
   * [CelebA](#celeba)
@@ -405,8 +392,8 @@ Spesso le GAN non convergono, come descritto nel capitolo sul [training](#allena
 ##### Tentativi di rimedio
 
 I ricercatori hanno provato ad usare varie forme di regolarizzazione per migliorare la convergenza delle GAN, incluso:
-- **Aggiungere rumore all'input del discriminatore**: vedere, ad esempio, [Towards Principled Methods For Training GAN](#https://arxiv.org/pdf/1701.04862.pdf).
-- **Penalizzare i pesi del discriminatore**: vedere, ad esempio, [Stabilizing Training of Generative Adversarial Networks through Regularization](#https://arxiv.org/pdf/1705.09367.pdf).
+- **Aggiungere rumore all'input del discriminatore**: vedere, ad esempio, [Towards Principled Methods For Training GAN](https://arxiv.org/pdf/1701.04862.pdf).
+- **Penalizzare i pesi del discriminatore**: vedere, ad esempio, [Stabilizing Training of Generative Adversarial Networks through Regularization](https://arxiv.org/pdf/1705.09367.pdf).
 
 ## Variazioni alle GAN
 
@@ -480,7 +467,6 @@ Durante il lavoro di riempimento, alcuni pezzi di un immagine sono oscurati e ri
 |:-----------------------------------------------:|:-------------------------------------------------:|
 |                   ***Input***                   |                   ***Output***                    |
 
-
 ### Text-to-Speech
 
 Non tutte le GAN producono immagini.
@@ -496,7 +482,14 @@ _BEGAN: Boundary Equilibrium Generative Adversarial Networks_
 
 David Berthelot, Thomas Schumm, Luke Metz
 
-#### Descrizione
+#### Abstract
+
+*We propose a new equilibrium enforcing method paired with a loss derived from the Wasserstein distance for training auto-encoder based Generative Adversarial Networks.
+This method balances the generator and discriminator during training.
+Additionally, it provides a new approximate convergence measure, fast and stable training and high visual quality.
+We also derive a way of controlling the trade-off between image diversity and visual quality.
+We focus on the image generation task, setting a new milestone in visual quality, even at higher resolutions.
+This is achieved while using a relatively simple model architecture and a standard training procedure.*
 
 ### DCGAN
 
@@ -506,7 +499,14 @@ _Deep Convolutional Generative Adversarial Network_
 
 Alec Radford, Luke Metz, Soumith Chintala
 
-#### Descrizione
+#### Abstract
+
+*In recent years, supervised learning with convolutional networks (CNNs) has seen huge adoption in computer vision applications.
+Comparatively, unsupervised learning with CNNs has received less attention.
+In this work we hope to help bridge the gap between the success of CNNs for supervised learning and unsupervised learning.
+We introduce a class of CNNs called deep convolutional generative adversarial networks (DCGANs), that have certain architectural constraints, and demonstrate that they are a strong candidate for unsupervised learning.
+Training on various image datasets, we show convincing evidence that our deep convolutional adversarial pair learns a hierarchy of representations from object parts to scenes in both the generator and discriminator.
+Additionally, we use the learned features for novel tasks - demonstrating their applicability as general image representations.*
 
 ### EBGAN
 
@@ -516,7 +516,13 @@ _Energy-based Generative Adversarial Network_
 
 Junbo Zhao, Michael Mathieu, Yann LeCun
 
-#### Descrizione
+#### Abstract
+
+*We introduce the "Energy-based Generative Adversarial Network" model (EBGAN) which views the discriminator as an energy function that attributes low energies to the regions near the data manifold and higher energies to other regions.
+Similar to the probabilistic GANs, a generator is seen as being trained to produce contrastive samples with minimal energies, while the discriminator is trained to assign high energies to these generated samples.
+Viewing the discriminator as an energy function allows to use a wide variety of architectures and loss functionals in addition to the usual binary classifier with logistic output.
+Among them, we show one instantiation of EBGAN framework as using an auto-encoder architecture, with the energy being the reconstruction error, in place of the discriminator.
+We show that this form of EBGAN exhibits more stable behavior than regular GANs during training. We also show that a single-scale architecture can be trained to generate high-resolution images.*
 
 ### GAN
 
@@ -526,7 +532,15 @@ _Generative Adversarial Network_
 
 Ian J. Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley, Sherjil Ozair, Aaron Courville, Yoshua Bengio
 
-#### Descrizione
+#### Abstract
+
+*We propose a new framework for estimating generative models via an adversarial process, in which we simultaneously train two models: a generative model G that captures the data distribution, and a discriminative model D that estimates the probability that a sample came from the training data rather than G.
+The training procedure for G is to maximize the probability of D making a mistake.
+This framework corresponds to a minimax two-player game.
+In the space of arbitrary functions G and D, a unique solution exists, with G recovering the training data distribution and D equal to 1/2 everywhere.
+In the case where G and D are defined by multilayer perceptrons, the entire system can be trained with backpropagation.
+There is no need for any Markov chains or unrolled approximate inference networks during either training or generation of samples.
+Experiments demonstrate the potential of the framework through qualitative and quantitative evaluation of the generated samples.*
 
 ### WGAN
 
@@ -536,7 +550,11 @@ _Wasserstein Generative Adversarial Network_
 
 Martin Arjovsky, Soumith Chintala, Léon Bottou
 
-#### Descrizione
+#### Abstract
+
+*We introduce a new algorithm named WGAN, an alternative to traditional GAN training.
+In this new model, we show that we can improve the stability of learning, get rid of problems like mode collapse, and provide meaningful learning curves useful for debugging and hyperparameter searches.
+Furthermore, we show that the corresponding optimization problem is sound, and provide extensive theoretical work highlighting the deep connections to other distances between distributions.*
 
 ## Risultati
 
