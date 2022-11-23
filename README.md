@@ -88,7 +88,7 @@ Qui riportiamo un diagramma dell'intero sistema
 
 ```mermaid
 graph LR
-A[Input randomico <br> con distribuzione <br> normale tra 0 e 1]
+A[Input randomico]
 B[Generatore]
 C[Immagine<br>Generata] 
 D[Dataset<br>Immagini Reali]
@@ -114,7 +114,7 @@ Il discriminatore in una GAN è semplicemente un classificatore. Cerca di distin
 
 ```mermaid
 graph LR
-A[Input randomico <br> con distribuzione <br> normale tra 0 e 1]
+A[Input randomico]
 B[Generatore]
 C[Immagine<br>Generata] 
 D[Dataset<br>Immagini Reali]
@@ -171,7 +171,7 @@ La porzione delle GAN che serve per allenare un generatore è formata da:
 
 ```mermaid
 graph LR
-A[Input randomico <br> con distribuzione <br> normale tra 0 e 1]
+A[Input randomico]
 subgraph "<--- backpropagation"
 B[Generatore]
 C[Immagine<br>Generata]
@@ -199,7 +199,39 @@ Le reti neurali richiedono una forma di input.
 Normalmente, inseriamo i dati con cui vogliamo fare qualcosa, ad esempio un'istanza che vogliamo classificare o su cui vogliamo fare una previsione.
 Ma cosa utilizziamo per l'input di una rete che genera istanze di dati completamente nuove?
 Nella loro forma base, le GAN prendono in input un random noise (rumore).
-Il generatore quindi trasforma questo rumore 
+Il generatore quindi trasforma questo rumore in un output con del significato.
+Introducendo del rumore, possiamo far produrre alle GAN una enorme varietà di dati, in base a dove prelevo il rumore all'interno della distribuzione target.
+Gli esperimenti suggeriscono che la distribuzione del rumore non è molto importante, quindi possiamo scegliere qualcosa da cui è facile campionare, come una distribuzione uniforme.
+Per comodità, lo spazio da cui viene campionato il rumore è solitamente di dimensioni inferiori rispetto alla dimensione dello spazio di output.
+Nel nostro caso abbiamo usato una distribuzione normale su 0 e 1 { N(z | µ = 0,σ = 1) }.
+
+#### Usare il discriminatore per allenare il generatore
+
+Per addestrare una rete neurale, modifichiamo i pesi della rete per ridurre l'errore o la loss dei suoi output.
+Tuttavia, nelle GAN il generatore non è direttamente collegato con la loss function che ci interessa e che ci serve per capire 
+Il generatore si collega direttamente alla rete del discriminatore, ed esso produce l'output che stiamo cercando di influenzare.
+La funzione di loss del generatore lo penalizza se produce un output che il discriminatore classifica come falso.
+
+Questo pezzo extra di rete neurale deve essere incluso nella backpropagation.
+La backpropagation aggiusta ogni peso nel modo corretto calcolando l'impatto del peso stesso sull'output (come cambia l'output se cambio il peso?).
+Ma l'impatto di un peso della rete del generatore dipende dall'impatto dei pesi della rete del discriminatore con i quali è collegato il peso iniziale.
+Quindi la backpropagation inizia dall'output e torna indietro attraverso il discriminatore e poi arriva nel generatore.
+
+Allo stesso tempo, non vogliamo che il discriminatore venga aggiornato durante l'allenamento del generatore.
+Trying to hit a moving target would make a hard problem even harder for the generator.
+Questo perché cercare di "colpire" un obiettivo che si sta muovendo (l'aggiornamento del discriminatore
+potrebbe far variare le sue classificazioni nel mentre che si sta allenando il generatore) renderebbe il compito di
+allenare il generatore ancora più difficile.
+
+Il training del generatore procede in questo modo:
+- si campiona del rumore casuale
+- viene prodotto l'output del generatore dal rumore casuale
+- si ottiene la classificazione "vero" o "falso" dal discriminatore
+- si calcola la loss function dalla classificazione del discriminatore
+- viene eseguita la backpropagation attraverso il discriminatore e poi il generatore per ottenere i gradienti
+- vengono usati i gradienti per aggiornare i pesi del solo generatore
+
+Questa è una iterazione dell'allenamento del generatore.
 
 ### Allenamento di una GAN
 
