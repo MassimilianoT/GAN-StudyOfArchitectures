@@ -4,7 +4,54 @@ Progetto per il corso "Machine Learning and Data Mining" per la laurea magistral
 
 ## Indice
 
-
+<!-- TOC -->
+* [Introduzione](#introduzione)
+  * [Modelli Generativi](#modelli-generativi)
+  * [I modelli generativi sono difficili](#i-modelli-generativi-sono-difficili)
+* [Anatomia di una GAN](#anatomia-di-una-gan)
+  * [Panoramica della struttura GAN](#panoramica-della-struttura-gan)
+  * [Discriminatore](#discriminatore)
+    * [Dati di addestramento per discriminatori](#dati-di-addestramento-per-discriminatori)
+    * [Allenare il discriminatore](#allenare-il-discriminatore)
+  * [Generatore](#generatore)
+    * [Input randomico](#input-randomico)
+    * [Usare il discriminatore per allenare il generatore](#usare-il-discriminatore-per-allenare-il-generatore)
+  * [Allenamento di una GAN](#allenamento-di-una-gan)
+    * [Addestramento alternato](#addestramento-alternato)
+    * [Convergenza](#convergenza)
+  * [Funzioni di Loss](#funzioni-di-loss)
+    * [Una o due funzioni di loss?](#una-o-due-funzioni-di-loss)
+    * [Minimax Loss](#minimax-loss)
+    * [Minimax Loss modificata](#minimax-loss-modificata)
+    * [Vulnerabilità della loss function base](#vulnerabilit-della-loss-function-base)
+    * [Ulteriori considerazioni](#ulteriori-considerazioni)
+* [GAN nel mondo reale](#gan-nel-mondo-reale)
+  * [Problemi comuni](#problemi-comuni)
+    * [Vanishing Gradients](#vanishing-gradients)
+      * [Tentativi di rimedio](#tentativi-di-rimedio)
+    * [Mode Collapse](#mode-collapse)
+      * [Tentativi di rimedio](#tentativi-di-rimedio)
+    * [Mancata convergenza](#mancata-convergenza)
+* [Architetture](#architetture)
+  * [BEGAN](#began)
+    * [Autori](#autori)
+    * [Descrizione](#descrizione)
+  * [DCGAN](#dcgan)
+    * [Autori](#autori)
+    * [Descrizione](#descrizione)
+  * [EBGAN](#ebgan)
+    * [Autori](#autori)
+    * [Descrizione](#descrizione)
+  * [GAN](#gan)
+    * [Autori](#autori)
+    * [Descrizione](#descrizione)
+  * [WGAN](#wgan)
+    * [Autori](#autori)
+    * [Descrizione](#descrizione)
+* [Risultati](#risultati)
+  * [MNIST](#mnist)
+  * [CelebA](#celeba)
+<!-- TOC -->
 
 ## Introduzione
 
@@ -268,8 +315,8 @@ Una GAN può avere due funzioni di loss: una per l'allenamento del generatore e 
 Come possono due funzioni di loss lavorare assieme per rappresentare una misura di distanza tra distribuzioni di probabilità?
 
 Nello schema che vedremo qui sotto, le loss del generatore e del discriminatore derivano da una singola misura di distanza tra distribuzioni di probabilità.
-In ogni caso, il generatore può andare ad influenzare un solo termine nella misura di distanza: il termine che rappresenta la distribuzione dei dati fake.
-Quindi durante l'allenamento del generatore andiamo ad eliminare l'altro termine, che rappresenta la distribuzione dei dati reali.
+In ogni caso, il generatore può andare a influenzare un solo termine nella misura di distanza: il termine che rappresenta la distribuzione dei dati fake.
+Quindi durante l'allenamento del generatore andiamo a eliminare l'altro termine, che rappresenta la distribuzione dei dati reali.
 
 Le loss del generatore e del discriminatore sono diverse alla fine, nonostante derivino da una singola formula.
 
@@ -289,9 +336,119 @@ In questa funzione:
 
 Il generatore non può influenzare direttamente il termine $log(D(x))$ nella funzione; quindi, per il generatore, minimizzare la loss equivale a minimizzare $log(1 - D(G(z)))$.
 
+#### Minimax Loss modificata
 
+Il paper originale delle GAN fa notare che la loss function minimax sopra riportata può causare il blocco della GAN nei primi passi dell'allenamento, quando il lavoro del discriminatore è molto semplice.
+Il documento suggerisce quindi di modificare la loss del generatore per fare in modo che esso provi a massimizzare $log(D(G(z)))$
 
-## Architetture
+#### Vulnerabilità della loss function base
+
+- Rischio che la GAN si possa bloccare
+- Rischio di Vanishing Gradient
+- Misura di distanza tra distribuzioni (cross-entropy) non reale, non è rappresentata da nulla nel mondo reale
+
+#### Ulteriori considerazioni
+
+In questo paragrafo abbiamo visto rappresentata la loss function base per le GAN, non è l'unica che si utilizza.
+Vedremo poi le WGAN come modificano questa funzione per ottenere risultati migliori.
+
+## GAN nel mondo reale
+
+### Problemi comuni
+
+Le GAN hanno un certo numero di modi comuni di fallire.
+Tutti questi problemi sono aree di ricerca attive al giorno d'oggi.
+Nessuno di questi problemi è stato completamente risolto, ma menzioneremo alcuni espedienti sono stati provati.
+
+#### Vanishing Gradients
+
+Una ricerca ha fatto emergere che se il tuo discriminatore è troppo bravo, allora l'allenamento del generatore può fallire a causa di vanishing gradients (il gradiente è talmente piccolo che il peso non viene modificato di valore).
+In effetti, un discriminatore ottimale non fornisce abbastanza informazioni al generatore per fare dei progressi.
+
+##### Tentativi di rimedio
+
+- **Wasserstein loss**: La Wasserstein loss è stata ideata per prevenire vanishing gradients anche quando stiamo allenando il discriminatore per raggiungere l'ottimalità.
+- **Minimax loss modificata**: Nel paper originale delle GAN viene proposta una modifica alla minimax loss per gestire il problema dei vanishing gradients.
+
+#### Mode Collapse
+
+Generalmente si vuole che la GAN produca un'ampia varietà di output. Si vuole, ad esempio, una faccia differente per ogni input randomico fornito al generatore.
+
+Tuttavia, se il generatore produce un output particolarmente plausibile, esso potrebbe imparare a produrre solo quell'output. Di fatto, il generatore sta continuamente provando a cercare quel singolo output che sembra il più plausibile al discriminatore.
+
+Se il generatore inizia a produrre sempre lo stesso output (o un piccolo set di output) continuamente, la migliore strategia per il discriminatore è quella di imparare a rifiutare sempre quell'output.
+Ma se la prossima iterazione del discriminatore si blocca in un minimo locale e non trova la miglior strategia, diventa troppo facile per la prossima iterazione del generatore trovare l'output più plausibile per il discriminatore corrente.
+
+Ogni iterazione del generatore esegue un'ottimizzazione eccessiva per un particolare discriminatore ed esso non imparerà mai come uscire dalla trappola.
+Di conseguenza, i generatori ruotano attraverso un piccolo set di tipi di output. Questa forma di errore nelle GAN è chiamata **mode collapse**.
+
+##### Tentativi di rimedio
+
+I seguenti approcci cercano di costringere il generatore ad ampliare il proprio set/ambito, impedendone l'ottimizzazione per un singolo discriminatore fisso:
+- **Wasserstein loss**: La Wasserstein loss allevia il mode collapse permettendoti di allenare il discriminatore all'ottimalità senza preoccuparti del vanishing gradients. Se il discriminatore non si blocca in un minimo locale, impara come rifiutare gli output su cui il generatore si è fissato. Quindi il generatore dovrà provare a generare qualcosa di nuovo.
+- **Unrolled GANs**: Le unrolled GAN usano una funzione di loss del generatore che incorpora non solo la classificazione corrente del discriminatore, ma anche gli output di versioni future del discriminatore. Quindi il generatore non può ottimizzarsi in maniera eccessiva su un singolo discriminatore.
+
+#### Mancata convergenza
+
+Spesso le GAN non convergono, come descritto nel capitolo sul [training](#allenamento-di-una-gan).
+
+##### Tentativi di rimedio
+
+I ricercatori hanno provato ad usare varie forme di regolarizzazione per migliorare la convergenza delle GAN, incluso:
+- **Aggiungere rumore all'input del discriminatore**: vedere, ad esempio, [Towards Principled Methods For Training GAN](#https://arxiv.org/pdf/1701.04862.pdf).
+- **Penalizzare i pesi del discriminatore**: vedere, ad esempio, [Stabilizing Training of Generative Adversarial Networks through Regularization](#https://arxiv.org/pdf/1705.09367.pdf).
+
+## Variazioni alle GAN
+
+I ricercatori continuano a cercare tecniche migliorative e nuovi usi per le GAN.
+Qui sotto riportiamo un campione delle variazioni apportate alle GAN per dare un'idea delle possibilità che attualmente si hanno.
+
+### Progressive GAN
+
+In una progressive GAN, il primo livello del generatore produce immagini ad una risoluzione molto bassa, e i livelli successivi continuano ad aggiungere dettaglio.
+Questa tecnica permette alle GAN di allenarsi molto più rapidamente rispetto alle GAN non progressive, e produce immagini ad una risoluzione più alta.
+
+### Conditional GAN
+
+Le conditional GAN si allenano su un set di dati etichettati e ti lasciano specificare l'etichetta per ogni istanza generata.
+Per esempio, una GAN non condizionata sul dataset MNIST produrrà numeri casuali, mentre una GAN condizionata sul dataset MNIST ti lascerà specificare quale numero vuoi che la GAN generi.
+
+Al posto di modellare la probabilità congiunta P(X, Y), le conditional GAN modellano la probabilità condizionata P(X | Y).
+
+### Image-to-Image Translation
+
+Le Image-to-Image translation GAN prendono in input un immagine ed in output forniscono un'immagine con proprietà differenti.
+Per esempio, possiamo avere in input una immagine con una mascheratura colorata a forma di un auto e la GAN può riempire la forma con dettagli fotorealistici.
+
+Similmente, puoi allenare una GAN Image-to-Image a prendere disegni di borse e trasformarli in immagini fotorealistiche di borse.
+
+![Image-to-Image](./assets/img2img.png)
+
+In questi casi, la loss è una combinazione pesata di una classica loss basata sul discriminatore e una loss pixel-wise che penalizza il generatore per allontanarsi dall'immagine di origine che è un semplice schizzo a matita, ad esempio.
+
+### CycleGAN
+
+Le CycleGAN imparano a trasformare immagini da un set in immagini che potrebbero presumibilmente appartenere ad un altro set.
+Ad esempio, una CycleGAN ha prodotto l'immagine di destra dandole in input l'immagine di sinistra qua sotto riportate.
+Ha preso in input un immagine di un cavallo e l'ha trasformata in un immagine di una zebra.
+
+![CycleGAN](./assets/cyclegan.png)
+
+I dati di training per la CycleGAN sono semplicemente due set di immagini (in questo caso, un set di immagini di cavalli e un set di immagini di zebre).
+Il sistema non richiede etichette o corrispondenze a coppie tra le immagini.
+
+### Text-to-Image Synthesis
+
+Le GAN text-to-image prendono in input del testo e producono in output delle immagini che sono plausibili e sono descritte dal testo immesso in input.
+Ad esempio, l'immagine del fiore qui sotto è stata prodotta fornendo una descrizione testuale alla GAN.
+
+<p align="center">"This flower has petals that are yellow with shades of orange."</p>
+
+![Text-to-image](./assets/text2img.png)
+
+Notare che in questo sistema la GAN può produrre solo immagini da un piccoli set di classi.
+
+## Architetture prese in esame
 
 ### BEGAN
 
