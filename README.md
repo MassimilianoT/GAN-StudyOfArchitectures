@@ -90,7 +90,7 @@ $\sim$
 
 ```mermaid
 graph LR
-A[Input randomico <br> x $\sim$ N 1,0]
+A[Input randomico <br> con distribuzione <br> normale tra 0 e 1]
 B[Generatore]
 C[Immagine<br>Generata]
 D[Dataset<br>Immagini Reali]
