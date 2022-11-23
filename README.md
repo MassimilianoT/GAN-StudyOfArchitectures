@@ -235,7 +235,40 @@ Questa è una iterazione dell'allenamento del generatore.
 
 ### Allenamento di una GAN
 
+Dato che una GAN contiene due reti addestrate separatamente, il suo algoritmo di training incontra due complicazioni:
+- la GAN deve destreggiarsi tra due tipi differenti di allenamento (generatore e discriminatore)
+- la convergenza di una GAN è difficile da identificare
 
+#### Addestramento alternato
+
+Il generatore e il discriminatore hanno differenti processi di addestramento. Quindi, come alleniamo le GAN nel loro complesso?
+
+L'allenamento delle GAN procede a intervalli alternati:
+1. Il discriminatore viene allenato per una o più epoche
+2. Il generatore viene allenato per una o più epoche
+3. Si ripetono gli step 1 e 2 per continuare ad addestrare le due reti
+
+Manteniamo il generatore costante durante l'allenamento del discriminatore.
+Mentre il discriminatore si allena per capire come distinguere i dati reali dai falsi, deve anche imparare come riconoscere i difetti del generatore.
+Questo è un problema diverso per un generatore accuratamente addestrato rispetto a un generatore non addestrato che produce un output casuale.
+
+Similmente, manteniamo il discriminatore costante durante la fase di training del generatore.
+Altrimenti il generatore proverebbe a colpire un bersaglio continuamente in movimento e potrebbe non convergere mai.
+
+È questo continuo "avanti e indietro" che permette alle GAN di affrontare problemi generativi altrimenti intrattabili. 
+Possiamo avere un "appiglio" per risolvere problemi generativi difficili se partiamo con un problema di classificazione più semplice.
+Al contrario, se non si può allenare un classificare per dirci la differenza tra dati reali e dati generati anche per l'output iniziale del generatore casuale, non è possibile iniziare l'addestramento GAN.
+
+#### Convergenza
+
+Mentre il generatore migliora con l'allenamento, le performance del discriminatore peggiorano perché non riesce più a trovare le differenze tra reale e fake.
+Se il generatore ottiene dei risultati ottimali, il discriminatore avrà un accuratezza del 50%.
+In effetti, il discriminatore lancia una moneta per fare la sua predizione.
+
+Questa progressione rappresenta un problema per la convergenza delle GAN nel loro complesso: il feedback del discriminatore diventano sempre meno significativi nel tempo.
+Se la GAN continua l'addestramento e supera il punto in cui il discriminatore sta dando un feedback completamente casuale, allora il generatore continuerà ad allenarsi su feedback insensati e la sua stessa qualità e accuratezza potrebbe collassare.
+
+Per le GAN, la convergenza è spesso uno stato breve e temporaneo piuttosto che uno stato stabile.
 
 ### Funzione di Loss
 
