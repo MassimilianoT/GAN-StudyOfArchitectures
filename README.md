@@ -4,24 +4,7 @@ Progetto per il corso "Machine Learning and Data Mining" per la laurea magistral
 
 ## Indice
 
- - [Introduzione](#introduzione)
-   - [Cos'è un modello generativo?](#modelli-generativi)
-   - [I modelli generativi sono difficili](#i-modelli-generativi-sono-difficili)
- - [Anatomia di una GAN](#anatomia-di-una-gan)
-   - [Panoramica della struttura GAN](#panoramica-della-struttura-gan)
-   - [Discriminatore](#discriminatore)
-   - [Generatore](#generatore)
-   - [Allenamento di una GAN](#allenamento-di-una-gan)
-   - [Funzione di Loss](#funzione-di-loss)
- - [Architetture](#architetture)
-   - [BEGAN](#began)
-   - [DCGAN](#dcgan)
-   - [EBGAN](#ebgan)
-   - [GAN](#gan)
-   - [WGAN](#wgan)
- - [Risultati](#risultati)
-   - [MNIST](#mnist)
-   - [CelebA](#celeba)
+
 
 ## Introduzione
 
@@ -270,9 +253,31 @@ Se la GAN continua l'addestramento e supera il punto in cui il discriminatore st
 
 Per le GAN, la convergenza è spesso uno stato breve e temporaneo piuttosto che uno stato stabile.
 
-### Funzione di Loss
+### Funzioni di Loss
 
+Le GAN tentano di replicare una distribuzione di probabilità.
+Quindi, devono utilizzare funzioni di loss che riflettono la distanza tra la distribuzione dei dati generati dalla GAN e la distribuzione dei dati reali.
 
+Come si cattura la differenza tra due distribuzione nelle funzioni di loss delle GAN?
+Questa è una domanda oggetto di una specifica area di ricerca tuttora attiva, e molti approcci sono stati proposti.
+La GAN base utilizza una funzione di loss chiamata **minimax**.
+
+#### Una o due funzioni di loss?
+
+Una GAN può avere due funzioni di loss: una per l'allenamento del generatore e una per l'allenamento del discriminatore.
+Come possono due funzioni di loss lavorare assieme per rappresentare una misura di distanza tra distribuzioni di probabilità?
+
+Nello schema che vedremo qui sotto, le loss del generatore e del discriminatore derivano da una singola misura di distanza tra distribuzioni di probabilità.
+In ogni caso, il generatore può andare ad influenzare un solo termine nella misura di distanza: il termine che rappresenta la distribuzione dei dati fake.
+Quindi durante l'allenamento del generatore andiamo ad eliminare l'altro termine, che rappresenta la distribuzione dei dati reali.
+
+Le loss del generatore e del discriminatore sono diverse alla fine, nonostante derivino da una singola formula.
+
+#### Minimax Loss
+
+Nel paper che ha introdotto le GAN, il generatore prova a minimizzare la funzione seguente mentre il discriminatore prova a massimizzarla:
+
+$E_{x}[log(D(x))] + E_{z}[log(1 - D(G(z)))]$
 
 ## Architetture
 
