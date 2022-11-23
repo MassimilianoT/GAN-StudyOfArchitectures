@@ -86,18 +86,16 @@ Infine, se l'addestramento del generatore si conclude per il meglio, il discrimi
 ![GAN fine](./assets/good_gan.jpg)
 Qui riportiamo un diagramma dell'intero sistema
 
-$\equiv$
-
 ```mermaid
 graph LR
-A["Input randomico (x $\equiv$ N(µ,σ))"]
+A[Input randomico <br> x $\sim$ N$(1,0)$]
 B[Generatore]
-C[Immagine Generata]
-D[Dataset Immagini Reali]
-E[Immagine Campionata]
+C[Immagine<br>Generata]
+D[Dataset<br>Immagini Reali]
+E[Immagine<br>Campionata]
 F[Discriminatore]
-G[Loss Function Discriminatore]
-H[Loss Function Generatore]
+G[Loss Function<br>Discriminatore]
+H[Loss Function<br>Generatore]
 
 A --> B
 B --> C
