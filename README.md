@@ -603,8 +603,8 @@ Di seguito si mostrano i risultati dei vari modelli allenati sui dataset MNIST e
 
 ### MNIST
 | ![GAN](./assets/results/Mnist/generated_image_gan.png) | ![WGAN](./assets/results/Mnist/generated_image_wgan.png) | ![BEGAN](./assets/results/Mnist/generated_image_began.png) | ![DCGAN](./assets/results/Mnist/generated_image_dcgan.png) | ![EBGAN](./assets/results/Mnist/generated_image_ebgan.png) |
-|:--------------------------------:|:--------------------------------------------------------:|:----------------------------------------------------------:|:----------------------------------------------------------:|:----------------------------------------------------------:|
-|            ***GAN***             |                        ***WGAN***                        |                        ***BEGAN***                         |                        ***DCGAN***                         |                        ***EBGAN***                         |
+|:------------------------------------------------------:|:--------------------------------------------------------:|:----------------------------------------------------------:|:----------------------------------------------------------:|:----------------------------------------------------------:|
+|                       ***GAN***                        |                        ***WGAN***                        |                        ***BEGAN***                         |                        ***DCGAN***                         |                        ***EBGAN***                         |
 
 ### CelebA
 | ![GAN](./assets/results/CelebA/generated_image_gan.png) | ![WGAN](./assets/results/CelebA/generated_image_wgan.png) | ![BEGAN](./assets/results/CelebA/generated_image_began.png) | ![DCGAN](./assets/results/CelebA/generated_image_dcgan.png) | ![EBGAN](./assets/results/CelebA/generated_image_ebgan.png) |
