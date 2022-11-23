@@ -484,12 +484,12 @@ David Berthelot, Thomas Schumm, Luke Metz
 
 #### Abstract
 
-*We propose a new equilibrium enforcing method paired with a loss derived from the Wasserstein distance for training auto-encoder based Generative Adversarial Networks.
-This method balances the generator and discriminator during training.
-Additionally, it provides a new approximate convergence measure, fast and stable training and high visual quality.
-We also derive a way of controlling the trade-off between image diversity and visual quality.
-We focus on the image generation task, setting a new milestone in visual quality, even at higher resolutions.
-This is achieved while using a relatively simple model architecture and a standard training procedure.*
+*Proponiamo un nuovo metodo di rafforzamento dell'equilibrio abbinato a una funzione di loss derivata dalla distanza di Wasserstein per l'allenamento di GAN basate su auto-encoder.
+Questo metodo bilancia il generatore e il discriminatore durante l'allenamento.
+In aggiunta, fornisce una nuova misura di convergenza approssimata, allenamento veloce e stabile e alta qualità delle immagini.
+Abbiamo inoltre derivato un modo per controllare il trade-off tra diversità delle immagini e qualità delle stesse.
+Ci concentriamo sull'attività di generazione delle immagini, stabilendo una nuova pietra miliare nella qualità visiva, anche a risoluzioni più elevate.
+Ciò si ottiene utilizzando un'architettura del modello relativamente semplice e una procedura di addestramento standard.*
 
 ### DCGAN
 
@@ -501,12 +501,12 @@ Alec Radford, Luke Metz, Soumith Chintala
 
 #### Abstract
 
-*In recent years, supervised learning with convolutional networks (CNNs) has seen huge adoption in computer vision applications.
-Comparatively, unsupervised learning with CNNs has received less attention.
-In this work we hope to help bridge the gap between the success of CNNs for supervised learning and unsupervised learning.
-We introduce a class of CNNs called deep convolutional generative adversarial networks (DCGANs), that have certain architectural constraints, and demonstrate that they are a strong candidate for unsupervised learning.
-Training on various image datasets, we show convincing evidence that our deep convolutional adversarial pair learns a hierarchy of representations from object parts to scenes in both the generator and discriminator.
-Additionally, we use the learned features for novel tasks - demonstrating their applicability as general image representations.*
+*Negli ultimi anni, l'apprendimento supervisionato con le reti convoluzionali (CNN) ha visto un'enorme adozione nelle applicazioni di visione artificiale.
+A confronto, l'apprendimento non supervisionato con le CNN ha ricevuto meno attenzione.
+In questo lavoro speriamo di contribuire a colmare il divario tra il successo delle CNN per l'apprendimento supervisionato e l'apprendimento non supervisionato.
+Introduciamo una classe di CNN chiamate Deep Convolutional GAN (DCGAN), che hanno determinati vincoli architetturali e dimostriamo che sono un valido candidato per l'apprendimento non supervisionato.
+Addestrandoci su vari set di dati di immagini, mostriamo prove convincenti che la nostra coppia di reti convoluzionali avversarie apprende una gerarchia di rappresentazioni dalle parti dell'oggetto alle scene sia nel generatore che nel discriminatore.
+Inoltre, utilizziamo le funzionalità apprese per nuovi compiti, dimostrando la loro applicabilità come rappresentazioni di immagini generali.*
 
 ### EBGAN
 
@@ -518,11 +518,12 @@ Junbo Zhao, Michael Mathieu, Yann LeCun
 
 #### Abstract
 
-*We introduce the "Energy-based Generative Adversarial Network" model (EBGAN) which views the discriminator as an energy function that attributes low energies to the regions near the data manifold and higher energies to other regions.
-Similar to the probabilistic GANs, a generator is seen as being trained to produce contrastive samples with minimal energies, while the discriminator is trained to assign high energies to these generated samples.
-Viewing the discriminator as an energy function allows to use a wide variety of architectures and loss functionals in addition to the usual binary classifier with logistic output.
-Among them, we show one instantiation of EBGAN framework as using an auto-encoder architecture, with the energy being the reconstruction error, in place of the discriminator.
-We show that this form of EBGAN exhibits more stable behavior than regular GANs during training. We also show that a single-scale architecture can be trained to generate high-resolution images.*
+*Introduciamo il modello "Energy-based Generative Adversarial Network" (EBGAN) che vede il discriminatore come una funzione energetica che attribuisce basse energie alle regioni vicine al collettore di dati ed energie più elevate ad altre regioni.
+Simile ai GAN probabilistici, un generatore è visto come addestrato per produrre campioni contrastanti con energie minime, mentre il discriminatore è addestrato ad assegnare energie elevate a questi campioni generati.
+Considerare il discriminatore come una funzione energetica consente di utilizzare un'ampia varietà di architetture e loss function oltre al solito classificatore binario con output logistico.
+Tra questi, mostriamo un'istanza del framework EBGAN che utilizza un'architettura di auto-encoder, con l'energia che è l'errore di ricostruzione, al posto del discriminatore.
+Mostriamo che questa forma di EBGAN mostra un comportamento più stabile rispetto ai normali GAN durante l'allenamento.
+Mostriamo anche che un'architettura a scala singola può essere addestrata per generare immagini ad alta risoluzione.*
 
 ### GAN
 
@@ -534,13 +535,13 @@ Ian J. Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley,
 
 #### Abstract
 
-*We propose a new framework for estimating generative models via an adversarial process, in which we simultaneously train two models: a generative model G that captures the data distribution, and a discriminative model D that estimates the probability that a sample came from the training data rather than G.
-The training procedure for G is to maximize the probability of D making a mistake.
-This framework corresponds to a minimax two-player game.
-In the space of arbitrary functions G and D, a unique solution exists, with G recovering the training data distribution and D equal to 1/2 everywhere.
-In the case where G and D are defined by multilayer perceptrons, the entire system can be trained with backpropagation.
-There is no need for any Markov chains or unrolled approximate inference networks during either training or generation of samples.
-Experiments demonstrate the potential of the framework through qualitative and quantitative evaluation of the generated samples.*
+*Proponiamo un nuovo framework per la stima dei modelli generativi tramite un processo contraddittorio, in cui alleniamo contemporaneamente due modelli: un modello generativo G che cattura la distribuzione dei dati e un modello discriminatorio D che stima la probabilità che un campione provenga dai dati di addestramento piuttosto che dal generatore G.
+Il processo di allenamento per G è quello di massimizzare la probabilità che D commetta un errore nel distinguere le istanze fasulle da quelle reali.
+Questo framework corrisponde ad una minimax a due giocatori.
+Nello spazio delle funzioni arbitrarie G e D esiste un'unica soluzione, con G che recupera la distribuzione dei dati di addestramento e D uguale a 0.5 ovunque.
+Nel caso in cui le reti del generatore e del discriminatore siano definite da percettroni multistrato, l'intero sistema può essere addestrato con la backpropagation.
+Non sono necessarie catene di Markov o reti di inferenza approssimative srotolate durante l'addestramento o la generazione di campioni.
+Gli esperimenti dimostrano il potenziale del framework attraverso la valutazione qualitativa e quantitativa dei campioni generati.*
 
 ### WGAN
 
@@ -552,9 +553,9 @@ Martin Arjovsky, Soumith Chintala, Léon Bottou
 
 #### Abstract
 
-*We introduce a new algorithm named WGAN, an alternative to traditional GAN training.
-In this new model, we show that we can improve the stability of learning, get rid of problems like mode collapse, and provide meaningful learning curves useful for debugging and hyperparameter searches.
-Furthermore, we show that the corresponding optimization problem is sound, and provide extensive theoretical work highlighting the deep connections to other distances between distributions.*
+*Introduciamo un nuovo algoritmo chiamato WGAN, un'alternativa al tradizionale training GAN.
+In questo nuovo modello, mostriamo che possiamo migliorare la stabilità dell'apprendimento, eliminare problemi come il mode collapse e fornire curve di apprendimento significative utili per il debug e le ricerche di iperparametri.
+Inoltre, mostriamo che il corrispondente problema di ottimizzazione è valido e forniamo un ampio lavoro teorico che evidenzia le connessioni profonde con altre distanze tra le distribuzioni.*
 
 ## Risultati
 
