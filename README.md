@@ -557,6 +557,46 @@ Martin Arjovsky, Soumith Chintala, Léon Bottou
 In questo nuovo modello, mostriamo che possiamo migliorare la stabilità dell'apprendimento, eliminare problemi come il mode collapse e fornire curve di apprendimento significative utili per il debug e le ricerche di iperparametri.
 Inoltre, mostriamo che il corrispondente problema di ottimizzazione è valido e forniamo un ampio lavoro teorico che evidenzia le connessioni profonde con altre distanze tra le distribuzioni.*
 
+#### Descrizione
+
+Viene modificata la loss function rispetto alla minimax delle GAN base, si utilizza la Wasserstein loss.
+Questa loss function dipende da una modifica dello schema GAN in cui il discriminatore non classifica effettivamente le istanze.
+Per ogni istanza restituisce un numero.
+Questo numero non deve essere inferiore a 1 o maggiore di 0, quindi non possiamo utilizzare 0,5 come soglia per decidere se un'istanza è reale o falsa.
+L'addestramento del discriminatore tenta solo di rendere l'output per le istanze reali maggiore rispetto a quello per le istanze false.
+
+Poiché non può davvero discriminare tra il vero e il falso, il discriminatore WGAN è in realtà chiamato "critico".
+Questa distinzione ha un'importanza teorica, ma, per scopi pratici, possiamo considerarla un riconoscimento che gli input per le funzioni di perdita non devono essere probabilità.
+
+Le stesse funzioni di perdita sono ingannevolmente semplici:
+
+**Loss function del critico:** $D(x) - D(G(z))$
+
+Il discriminatore cerca di massimizzare questa funzione.
+In altre parole, cerca di massimizzare la differenza tra il suo output su istanze reali e quello su istanze false.
+
+**Loss function del generatore:** $D(G(z))$
+
+Il generatore cerca di massimizzare questa funzione.
+In altre parole, cerca di massimizzare l'output del discriminatore per le sue istanze fake.
+
+In queste funzioni:
+- $D(x)$ è l'output del critico per un'istanza reale.
+- $G(z)$ è l'output del generatore dato del rumore z.
+- $D(G(z))$ è l'output del critico per un'istanza fake.
+- L'output del critico D non deve essere compreso tra 1 e 0.
+- Le formule derivano dalla [earth mover distance](https://en.wikipedia.org/wiki/Earth_mover's_distance) tra le distribuzioni reali e generate.
+
+#### Requisiti
+
+La giustificazione teorica per le WGAN richiede che i pesi all'interno delle GAN vengano tagliati in modo che rimangano entro un intervallo limitato.
+
+#### Benefici
+
+Le WGAN sono meno vulnerabili al blocco rispetto alle GAN basate su minimax ed evitano problemi con vanishing gradients.
+La earth mover distance ha anche il vantaggio di essere una vera metrica: una misura della distanza in uno spazio di distribuzioni di probabilità.
+La cross entropy non è una metrica in questo senso.
+
 ## Risultati
 
 Di seguito si mostrano i risultati dei vari modelli allenati sui dataset MNIST e CelebA
