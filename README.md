@@ -442,7 +442,7 @@ Il sistema non richiede etichette o corrispondenze a coppie tra le immagini.
 Le GAN text-to-image prendono in input del testo e producono in output delle immagini che sono plausibili e sono descritte dal testo immesso in input.
 Ad esempio, l'immagine del fiore qui sotto è stata prodotta fornendo una descrizione testuale alla GAN.
 
-<p align="center">"This flower has petals that are yellow with shades of orange."</p>
+***This flower has petals that are yellow with shades of orange***
 
 ![Text-to-image](./assets/text2img.png)
 
