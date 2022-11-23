@@ -1,19 +1,13 @@
-import argparse
 import os
-from pkgutil import get_data
+
 import numpy as np
-import math
-
+import torch
+import torch.nn as nn
 import torchvision.transforms as transforms
-from torchvision.utils import save_image
-
+from torch.autograd import Variable
 from torch.utils.data import DataLoader
 from torchvision import datasets
-from torch.autograd import Variable
-
-import torch.nn as nn
-import torch.nn.functional as F
-import torch
+from torchvision.utils import save_image
 
 n_epochs = 1000
 batch_size = 64

@@ -561,14 +561,14 @@ Furthermore, we show that the corresponding optimization problem is sound, and p
 Di seguito si mostrano i risultati dei vari modelli allenati sui dataset MNIST e CelebA
 
 ### MNIST
-| ![GAN](./assets/generative_v_discriminative.png) | ![WGAN](./assets/generative_v_discriminative.png) | ![BEGAN](./assets/generative_v_discriminative.png) | ![DCGAN](./assets/generative_v_discriminative.png) | ![EBGAN](./assets/generative_v_discriminative.png) |
-|:------------------------------------------------:|:-------------------------------------------------:|:--------------------------------------------------:|:--------------------------------------------------:|:--------------------------------------------------:|
-|                    ***GAN***                     |                    ***WGAN***                     |                    ***BEGAN***                     |                    ***DCGAN***                     |                    ***EBGAN***                     |
+| ![GAN](./assets/results/Mnist/generated_image_gan.png) | ![WGAN](./assets/results/Mnist/generated_image_wgan.png) | ![BEGAN](./assets/results/Mnist/generated_image_began.png) | ![DCGAN](./assets/results/Mnist/generated_image_dcgan.png) | ![EBGAN](./assets/results/Mnist/generated_image_ebgan.png) |
+|:--------------------------------:|:--------------------------------------------------------:|:----------------------------------------------------------:|:----------------------------------------------------------:|:----------------------------------------------------------:|
+|            ***GAN***             |                        ***WGAN***                        |                        ***BEGAN***                         |                        ***DCGAN***                         |                        ***EBGAN***                         |
 
 ### CelebA
-| ![GAN](./assets/generative_v_discriminative.png) | ![WGAN](./assets/generative_v_discriminative.png) | ![BEGAN](./assets/generative_v_discriminative.png) | ![DCGAN](./assets/generative_v_discriminative.png) | ![EBGAN](./assets/generative_v_discriminative.png) |
-|:------------------------------------------------:|:-------------------------------------------------:|:--------------------------------------------------:|:--------------------------------------------------:|:--------------------------------------------------:|
-|                    ***GAN***                     |                    ***WGAN***                     |                    ***BEGAN***                     |                    ***DCGAN***                     |                    ***EBGAN***                     |
+| ![GAN](./assets/results/CelebA/generated_image_gan.png) | ![WGAN](./assets/results/CelebA/generated_image_wgan.png) | ![BEGAN](./assets/results/CelebA/generated_image_began.png) | ![DCGAN](./assets/results/CelebA/generated_image_dcgan.png) | ![EBGAN](./assets/results/CelebA/generated_image_ebgan.png) |
+|:-------------------------------------------------------:|:---------------------------------------------------------:|:-----------------------------------------------------------:|:-----------------------------------------------------------:|:-----------------------------------------------------------:|
+|                        ***GAN***                        |                        ***WGAN***                         |                         ***BEGAN***                         |                         ***DCGAN***                         |                         ***EBGAN***                         |
 
 
 &copy; Glisenti Mirko, Tummolo Massimiliano - Università degli Studi di Brescia (2022)

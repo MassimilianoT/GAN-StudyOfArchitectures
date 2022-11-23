@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import os.path
 
 dict = [
     {
@@ -54,7 +55,7 @@ dict = [
 ]
 
 for log in dict:
-    file = open(log['PathOfFile'], 'r')
+    file = open(os.path.join(os.getcwd(), log['PathOfFile']))
     I = []
     G = []
     D = []
@@ -72,4 +73,4 @@ for log in dict:
     plt.xlabel('Epoca')
     plt.ylabel('Loss Function')
     plt.title(log['NameOfGraph'])
-    plt.savefig(log['OutputFile'])
+    plt.savefig(os.path.join(os.getcwd(), log['OutputFile']))
