@@ -473,11 +473,18 @@ Al contrario, ha creato il suo pattern plausibile per sostituire quello cancella
 
 ### Face Inpainting
 
+Le GAN sono state usate per il riempimento automatico di spazi mancanti in immagini seguendo la semantica delle immagini stesse.
+Durante il lavoro di riempimento, alcuni pezzi di un immagine sono oscurati e riempiti di nero, il sistema proverà quindi a riempirli.
+
+| ![Inpainting input](./assets/inpainting_in.png) | ![Inpainting output](./assets/inpainting_out.png) |
+|:-----------------------------------------------:|:-------------------------------------------------:|
+|                   ***Input***                   |                   ***Output***                    |
 
 
 ### Text-to-Speech
 
-
+Non tutte le GAN producono immagini.
+Ad esempio, alcuni ricercatori hanno usato le GAN per produrre un discorso parlato sintetizzato da un input testuale.
 
 ## Architetture prese in esame
 
