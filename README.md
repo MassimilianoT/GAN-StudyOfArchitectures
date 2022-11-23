@@ -90,11 +90,39 @@ Qui riportiamo un diagramma dell'intero sistema
 graph LR
 A[Input randomico <br> con distribuzione <br> normale tra 0 e 1]
 B[Generatore]
-C[Immagine<br>Generata]
+C[Immagine<br>Generata] 
 D[Dataset<br>Immagini Reali]
-E[Immagine<br>Campionata]
+E[Immagine<br>Reale]
 F[Discriminatore]
 G[Loss Function<br>Discriminatore]
+H[Loss Function<br>Generatore]
+
+A --> B
+B --> C
+D --> E
+C --> F
+E --> F
+F --> G
+F --> H 
+```
+
+Sia il generatore che il discriminatore sono reti neurali. L'output del generatore è collegato direttamente all'ingresso del discriminatore. Attraverso la backpropagation, la classificazione del discriminatore fornisce un indicatore che il generatore utilizza per aggiornare i suoi pesi.
+
+### Discriminatore
+
+Il discriminatore in una GAN è semplicemente un classificatore. Cerca di distinguere i dati reali dai dati creati dal generatore. Potrebbe utilizzare qualsiasi architettura di rete appropriata per il tipo di dati che sta classificando.
+
+```mermaid
+graph LR
+A[Input randomico <br> con distribuzione <br> normale tra 0 e 1]
+B[Generatore]
+C[Immagine<br>Generata] 
+D[Dataset<br>Immagini Reali]
+E[Immagine<br>Reale]
+subgraph "<--- backpropagation"
+F[Discriminatore]
+G[Loss Function<br>Discriminatore]
+end
 H[Loss Function<br>Generatore]
 
 A --> B
@@ -106,15 +134,72 @@ F --> G
 F --> H
 ```
 
-Sia il generatore che il discriminatore sono reti neurali. L'output del generatore è collegato direttamente all'ingresso del discriminatore. Attraverso la backpropagation, la classificazione del discriminatore fornisce un indicatore che il generatore utilizza per aggiornare i suoi pesi.
+<p align="center">Figura 2: backpropagation nell'addestramento del discriminatore</p>
 
-### Discriminatore
+#### Dati di addestramento per discriminatori
 
+I dati di addestramento per i discriminatori provengono da due fonti:
+- Istanze di **dati reali**, come foto di persone. Il discriminatore usa queste istanze come istanze positive durante il suo allenamento
+- Istanze di **dati fake** creati dal generatore. Il discriminatore usa queste istanze come istanze negative durante il suo allenamento
 
+Nella Figura 2, le due caselle "Immagine Generata" e "Immagine Reale" rappresentano queste due origini dati che alimentano il discriminatore.
+Durante l'addestramento dei discriminatori, il generatore non viene addestrato.
+I suoi pesi rimangono costanti mentre produce esempi su cui il discriminatore può allenarsi.
+
+#### Allenare il discriminatore
+
+Il discriminatore si connette a due loss function.
+Durante l'addestramento del discriminatore, esso ignora la loss del generatore e utilizza semplicemente la loss del discriminatore.
+Utilizziamo la loss del generatore durante la formazione dello stesso.
+
+Durante l'allenamento del discriminatore:
+- il discriminatore classifica sia dati reali che dati fake del generatore
+- la funzione di loss del discriminatore lo penalizza se classifica istanze fake come reali o viceversa
+- il discriminatore aggiorna i suoi pesi mediante la backpropagation
 
 ### Generatore
 
+Il generatore di una GAN impara come creare dei buoni dati fake incorporando il feedback dato dal discriminatore.
+Impara come far classificare i suoi output come input reali dal discriminatore.
+L'allenamento del generatore richiede una maggior integrazione tra discriminatore e generatore rispetto a quanta ne richiede l'allenamento del discriminatore.
+La porzione delle GAN che serve per allenare un generatore è formata da:
+- un input randomico
+- la rete del generatore, che trasforma un input randomico in un'istanza di dati
+- la rete del discriminatore, che classifica i dati generati
+- l'output del discriminatore
+- la loss function del generatore, che penalizza il generatore se fallisce ad "ingannare" il discriminatore
 
+```mermaid
+graph LR
+A[Input randomico <br> con distribuzione <br> normale tra 0 e 1]
+subgraph "<--- backpropagation"
+B[Generatore]
+C[Immagine<br>Generata]
+F[Discriminatore]
+H[Loss Function<br>Generatore]
+end
+D[Dataset<br>Immagini Reali]
+E[Immagine<br>Reale]
+G[Loss Function<br>Discriminatore]
+
+A --> B
+B --> C
+D --> E
+C --> F
+E --> F
+F --> G
+F --> H
+```
+
+<p align="center">Figura 3: backpropagation nell'addestramento del generatore</p>
+
+#### Input randomico
+
+Le reti neurali richiedono una forma di input.
+Normalmente, inseriamo i dati con cui vogliamo fare qualcosa, ad esempio un'istanza che vogliamo classificare o su cui vogliamo fare una previsione.
+Ma cosa utilizziamo per l'input di una rete che genera istanze di dati completamente nuove?
+Nella loro forma base, le GAN prendono in input un random noise (rumore).
+Il generatore quindi trasforma questo rumore 
 
 ### Allenamento di una GAN
 
