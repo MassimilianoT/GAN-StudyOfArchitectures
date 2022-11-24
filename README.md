@@ -562,7 +562,7 @@ In queste funzioni:
 - $D(x)$ è l'output del critico per un'istanza reale.
 - $G(z)$ è l'output del generatore dato del rumore z.
 - $D(G(z))$ è l'output del critico per un'istanza fake.
-- L'output del critico D non deve essere compreso tra 1 e 0.
+- L'output del critico $D$ non deve essere compreso tra 1 e 0.
 - Le formule derivano dalla [earth mover distance](https://en.wikipedia.org/wiki/Earth_mover's_distance) tra le distribuzioni reali e generate.
 
 #### Requisiti
