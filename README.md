@@ -743,12 +743,12 @@ Choose: ...
 Di seguito si mostrano i risultati dei vari modelli allenati sui dataset MNIST e CelebA
 
 ### MNIST
-| ![GAN](./assets/readme/results/Mnist/generated_image_gan.png) | ![WGAN](./assets/readme/results/Mnist/generated_image_wgan.png) | ![BEGAN](./assets/readme/results/Mnist/generated_image_began.png) | ![DCGAN](./assets/readme/results/Mnist/generated_image_dcgan.png) | ![EBGAN](./assets/readme/results/Mnist/generated_image_ebgan.png) |
+| ![GAN](./assets/results/Mnist/generated_image_gan.png) | ![WGAN](./assets/results/Mnist/generated_image_wgan.png) | ![BEGAN](./assets/results/Mnist/generated_image_began.png) | ![DCGAN](./assets/results/Mnist/generated_image_dcgan.png) | ![EBGAN](./assets/results/Mnist/generated_image_ebgan.png) |
 |:------------------------------------------------------:|:--------------------------------------------------------:|:----------------------------------------------------------:|:----------------------------------------------------------:|:----------------------------------------------------------:|
 |                       ***GAN***                        |                        ***WGAN***                        |                        ***BEGAN***                         |                        ***DCGAN***                         |                        ***EBGAN***                         |
 
 ### CelebA
-| ![GAN](./assets/readme/results/CelebA/generated_image_gan.png) | ![WGAN](./assets/readme/results/CelebA/generated_image_wgan.png) | ![BEGAN](./assets/readme/results/CelebA/generated_image_began.png) | ![DCGAN](./assets/readme/results/CelebA/generated_image_dcgan.png) | ![EBGAN](./assets/readme/results/CelebA/generated_image_ebgan.png) |
+| ![GAN](./assets/results/CelebA/generated_image_gan.png) | ![WGAN](./assets/results/CelebA/generated_image_wgan.png) | ![BEGAN](./assets/readme/CelebA/generated_image_began.png) | ![DCGAN](./assets/results/CelebA/generated_image_dcgan.png) | ![EBGAN](./assets/results/CelebA/generated_image_ebgan.png) |
 |:-------------------------------------------------------:|:---------------------------------------------------------:|:-----------------------------------------------------------:|:-----------------------------------------------------------:|:-----------------------------------------------------------:|
 |                        ***GAN***                        |                        ***WGAN***                         |                         ***BEGAN***                         |                         ***DCGAN***                         |                         ***EBGAN***                         |
 
