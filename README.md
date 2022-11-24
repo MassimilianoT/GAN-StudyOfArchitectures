@@ -89,7 +89,7 @@ Un modello generativo per le immagini potrebbe catturare correlazioni come "gli 
 Al contrario, un modello discriminatorio potrebbe scoprire la differenza tra "barca a vela" o "non barca a vela" cercando semplicemente alcuni schemi che ricorrono in queste immagini. Potrebbe ignorare molte delle correlazioni che il modello generativo deve invece considerare per generare immagini valide.
 I modelli discriminatori tentano di tracciare i confini nello spazio dei dati, mentre i modelli generativi cercano di modellare il modo in cui i dati vengono posizionati all'interno dello spazio. Ad esempio, il seguente diagramma mostra modelli discriminatori e generativi di cifre scritte a mano:
 
-| ![Diagramma modelli discriminatori e generativi](./assets/generative_v_discriminative.png) |
+| ![Diagramma modelli discriminatori e generativi](./assets/readme/generative_v_discriminative.png) |
 |:------------------------------------------------------------------------------------------:|
 |         **Figura 1: modelli discriminatori e generativi di cifre scritte a mano**          |
 
@@ -106,11 +106,11 @@ Una rete generativa avversaria (GAN) si compone di due parti:
 - Il **discriminatore** impara a distinguere i dati falsi generati dal generatore da dati reali provenienti dal dataset. Il discriminatore penalizza il generatore quando produce dei risultati non plausibili.
 
 Quando l'allenamento è all'inizio, il generatore produce dati ovviamente falsi e quindi il discriminatore impara velocemente a dire che quei dati sono falsi:
-![GAN inizio](./assets/bad_gan.jpg)
+![GAN inizio](./assets/readme/bad_gan.jpg)
 Man mano che l'addestramento procede, il generatore si avvicina alla produzione di output che possono ingannare il discriminatore:
-![GAN durante](./assets/ok_gan.jpg)
+![GAN durante](./assets/readme/ok_gan.jpg)
 Infine, se l'addestramento del generatore si conclude per il meglio, il discriminatore peggiora nella comprensione della differenza tra reale e falso. Inizia a classificare i dati falsi come reali e la sua accuratezza diminuisce.
-![GAN fine](./assets/good_gan.jpg)
+![GAN fine](./assets/readme/good_gan.jpg)
 Qui riportiamo un diagramma dell'intero sistema
 
 ```mermaid
@@ -419,7 +419,7 @@ Per esempio, possiamo avere in input una immagine con una mascheratura colorata 
 
 Similmente, puoi allenare una GAN Image-to-Image a prendere disegni di borse e trasformarli in immagini fotorealistiche di borse.
 
-![Image-to-Image](./assets/img2img.png)
+![Image-to-Image](./assets/readme/img2img.png)
 
 In questi casi, la loss è una combinazione pesata di una classica loss basata sul discriminatore e una loss pixel-wise che penalizza il generatore per allontanarsi dall'immagine di origine che è un semplice schizzo a matita, ad esempio.
 
@@ -429,7 +429,7 @@ Le CycleGAN imparano a trasformare immagini da un set in immagini che potrebbero
 Ad esempio, una CycleGAN ha prodotto l'immagine di destra dandole in input l'immagine di sinistra qua sotto riportate.
 Ha preso in input un immagine di un cavallo e l'ha trasformata in un immagine di una zebra.
 
-![CycleGAN](./assets/cyclegan.png)
+![CycleGAN](./assets/readme/cyclegan.png)
 
 I dati di training per la CycleGAN sono semplicemente due set di immagini (in questo caso, un set di immagini di cavalli e un set di immagini di zebre).
 Il sistema non richiede etichette o corrispondenze a coppie tra le immagini.
@@ -441,7 +441,7 @@ Ad esempio, l'immagine del fiore qui sotto è stata prodotta fornendo una descri
 
 ***This flower has petals that are yellow with shades of orange***
 
-![Text-to-image](./assets/text2img.png)
+![Text-to-image](./assets/readme/text2img.png)
 
 Notare che in questo sistema la GAN può produrre solo immagini da un piccoli set di classi.
 
@@ -451,7 +451,7 @@ Le super-resolution GAN aumentano la risoluzione delle immagini, aggiungendo det
 Ad esempio, l'immagine sfocata centrale riportata qui sotto è un sotto campionamento dell'immagine originale a sinistra. 
 Data l'immagine sfocata, la GAN produce l'immagine più dettagliata di destra:
 
-| ![Original](./assets/superres_orig.png) | ![Blurred](./assets/superres_blurry.png) | ![GAN](./assets/superres_gan.png) |
+| ![Original](./assets/readme/superres_orig.png) | ![Blurred](./assets/readme/superres_blurry.png) | ![GAN](./assets/readme/superres_gan.png) |
 |:---------------------------------------:|:----------------------------------------:|:---------------------------------:|
 |             ***Original***              |              ***Blurred***               |      ***Restored with GAN***      |
 
@@ -463,7 +463,7 @@ Al contrario, ha creato il suo pattern plausibile per sostituire quello cancella
 Le GAN sono state usate per il riempimento automatico di spazi mancanti in immagini seguendo la semantica delle immagini stesse.
 Durante il lavoro di riempimento, alcuni pezzi di un immagine sono oscurati e riempiti di nero, il sistema proverà quindi a riempirli.
 
-| ![Inpainting input](./assets/inpainting_in.png) | ![Inpainting output](./assets/inpainting_out.png) |
+| ![Inpainting input](./assets/readme/inpainting_in.png) | ![Inpainting output](./assets/readme/inpainting_out.png) |
 |:-----------------------------------------------:|:-------------------------------------------------:|
 |                   ***Input***                   |                   ***Output***                    |
 
@@ -743,12 +743,12 @@ Choose: ...
 Di seguito si mostrano i risultati dei vari modelli allenati sui dataset MNIST e CelebA
 
 ### MNIST
-| ![GAN](./assets/results/Mnist/generated_image_gan.png) | ![WGAN](./assets/results/Mnist/generated_image_wgan.png) | ![BEGAN](./assets/results/Mnist/generated_image_began.png) | ![DCGAN](./assets/results/Mnist/generated_image_dcgan.png) | ![EBGAN](./assets/results/Mnist/generated_image_ebgan.png) |
+| ![GAN](./assets/readme/results/Mnist/generated_image_gan.png) | ![WGAN](./assets/readme/results/Mnist/generated_image_wgan.png) | ![BEGAN](./assets/readme/results/Mnist/generated_image_began.png) | ![DCGAN](./assets/readme/results/Mnist/generated_image_dcgan.png) | ![EBGAN](./assets/readme/results/Mnist/generated_image_ebgan.png) |
 |:------------------------------------------------------:|:--------------------------------------------------------:|:----------------------------------------------------------:|:----------------------------------------------------------:|:----------------------------------------------------------:|
 |                       ***GAN***                        |                        ***WGAN***                        |                        ***BEGAN***                         |                        ***DCGAN***                         |                        ***EBGAN***                         |
 
 ### CelebA
-| ![GAN](./assets/results/CelebA/generated_image_gan.png) | ![WGAN](./assets/results/CelebA/generated_image_wgan.png) | ![BEGAN](./assets/results/CelebA/generated_image_began.png) | ![DCGAN](./assets/results/CelebA/generated_image_dcgan.png) | ![EBGAN](./assets/results/CelebA/generated_image_ebgan.png) |
+| ![GAN](./assets/readme/results/CelebA/generated_image_gan.png) | ![WGAN](./assets/readme/results/CelebA/generated_image_wgan.png) | ![BEGAN](./assets/readme/results/CelebA/generated_image_began.png) | ![DCGAN](./assets/readme/results/CelebA/generated_image_dcgan.png) | ![EBGAN](./assets/readme/results/CelebA/generated_image_ebgan.png) |
 |:-------------------------------------------------------:|:---------------------------------------------------------:|:-----------------------------------------------------------:|:-----------------------------------------------------------:|:-----------------------------------------------------------:|
 |                        ***GAN***                        |                        ***WGAN***                         |                         ***BEGAN***                         |                         ***DCGAN***                         |                         ***EBGAN***                         |
 
