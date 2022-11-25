@@ -112,6 +112,7 @@ def models_menu():
     print("3. Load a BEGAN")
     print("4. Load a DCGAN")
     print("5. Load a EBGAN")
+    print("6. Load ALL models")
     print()
 
 
@@ -121,27 +122,62 @@ def dataset_menu():
     print("-------------------------")
     print("1. Load MNIST")
     print("2. Load CelebA")
+    print("3. Load ALL datasets")
     print()
 
 
 models_menu()
 scelta = int(input("Choose: "))
-if scelta != 1 and scelta != 2 and scelta != 3 and scelta != 4 and scelta != 5:
+if scelta != 1 and scelta != 2 and scelta != 3 and scelta != 4 and scelta != 5 and scelta != 6:
     print('errore')
 else:
     dataset_menu()
     scelta2 = int(input("Choose: "))
     print()
-    if scelta2 != 1 and scelta2 != 2:
+    if scelta2 != 1 and scelta2 != 2 and scelta2 != 3:
         print('errore')
     else:
-        if scelta == 1:
-            gan(scelta2)
-        elif scelta == 2:
-            wgan(scelta2)
-        elif scelta == 3:
-            began(scelta2)
-        elif scelta == 4:
-            dcgan(scelta2)
+        if scelta2 == 3:
+            if scelta == 1:
+                gan(1)
+                gan(2)
+            elif scelta == 2:
+                wgan(1)
+                wgan(2)
+            elif scelta == 3:
+                began(1)
+                began(2)
+            elif scelta == 4:
+                dcgan(1)
+                dcgan(2)
+            elif scelta == 5:
+                ebgan(1)
+                ebgan(2)
+            else:
+                gan(1)
+                gan(2)
+                wgan(1)
+                wgan(2)
+                began(1)
+                began(2)
+                dcgan(1)
+                dcgan(2)
+                ebgan(1)
+                ebgan(2)
         else:
-            ebgan(scelta2)
+            if scelta == 1:
+                gan(scelta2)
+            elif scelta == 2:
+                wgan(scelta2)
+            elif scelta == 3:
+                began(scelta2)
+            elif scelta == 4:
+                dcgan(scelta2)
+            elif scelta == 5:
+                ebgan(scelta2)
+            else:
+                gan(scelta2)
+                wgan(scelta2)
+                began(scelta2)
+                dcgan(scelta2)
+                ebgan(scelta2)

@@ -509,6 +509,7 @@ Loading a GAN Models
 3. Load a BEGAN
 4. Load a DCGAN
 5. Load a EBGAN
+6. Load ALL models
 
 Choose: 1
 
@@ -517,6 +518,7 @@ Loading which dataset
 -------------------------
 1. Load MNIST
 2. Load CelebA
+3. Load ALL datasets
 
 Choose: ...
 ```
@@ -544,9 +546,9 @@ Questo numero non deve essere inferiore a 1 o maggiore di 0, quindi non possiamo
 L'addestramento del discriminatore tenta solo di rendere l'output per le istanze reali maggiore rispetto a quello per le istanze false.
 
 Poiché non può davvero discriminare tra il vero e il falso, il discriminatore WGAN è in realtà chiamato "critico".
-Questa distinzione ha un'importanza teorica, ma, per scopi pratici, possiamo considerarla un riconoscimento che gli input per le funzioni di perdita non devono essere probabilità.
+Questa distinzione ha un'importanza teorica, ma, per scopi pratici, possiamo considerarla un riconoscimento che gli input per le funzioni di loss non devono essere probabilità.
 
-Le stesse funzioni di perdita sono ingannevolmente semplici:
+Le stesse funzioni di loss sembrerebbero pure semplici:
 
 **Loss function del critico:** $D(x) - D(G(z))$
 
@@ -588,6 +590,7 @@ Loading a GAN Models
 3. Load a BEGAN
 4. Load a DCGAN
 5. Load a EBGAN
+6. Load ALL models
 
 Choose: 2
 
@@ -596,6 +599,7 @@ Loading which dataset
 -------------------------
 1. Load MNIST
 2. Load CelebA
+3. Load ALL datasets
 
 Choose: ...
 ```
@@ -634,6 +638,7 @@ Loading a GAN Models
 3. Load a BEGAN
 4. Load a DCGAN
 5. Load a EBGAN
+6. Load ALL models
 
 Choose: 3
 
@@ -642,6 +647,7 @@ Loading which dataset
 -------------------------
 1. Load MNIST
 2. Load CelebA
+3. Load ALL datasets
 
 Choose: ...
 ```
@@ -680,6 +686,7 @@ Loading a GAN Models
 3. Load a BEGAN
 4. Load a DCGAN
 5. Load a EBGAN
+6. Load ALL models
 
 Choose: 4
 
@@ -688,6 +695,7 @@ Loading which dataset
 -------------------------
 1. Load MNIST
 2. Load CelebA
+3. Load ALL datasets
 
 Choose: ...
 ```
@@ -726,14 +734,15 @@ Loading a GAN Models
 3. Load a BEGAN
 4. Load a DCGAN
 5. Load a EBGAN
+6. Load ALL models
 
 Choose: 5
-
 -------------------------
 Loading which dataset
 -------------------------
 1. Load MNIST
 2. Load CelebA
+3. Load ALL datasets
 
 Choose: ...
 ```
