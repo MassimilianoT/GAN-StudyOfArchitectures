@@ -495,6 +495,11 @@ Gli esperimenti dimostrano il potenziale del framework attraverso la valutazione
 #### Descrizione
 
 
+#### Grafici
+
+|  ![GAN_Loss_G_vs_D](./assets/log/MNIST-gan.png)  |  ![GAN_Loss_G_vs_D](./assets/log/CelebA-gan.png)  |
+|:------------------------------------------------:|:-------------------------------------------------:|
+|            ***Grafico GAN su MNIST***            |            ***Grafico GAN su CelebA***            |
 
 #### Esempio di run
 
@@ -577,6 +582,12 @@ Le WGAN sono meno vulnerabili al blocco rispetto alle GAN basate su minimax ed e
 La earth mover distance ha anche il vantaggio di essere una vera metrica: una misura della distanza in uno spazio di distribuzioni di probabilità.
 La cross entropy non è una metrica in questo senso.
 
+#### Grafici
+
+| ![GAN_Loss_G_vs_D](./assets/log/MNIST-wgan.png) | ![GAN_Loss_G_vs_D](./assets/log/CelebA-wgan.png) |
+|:-----------------------------------------------:|:------------------------------------------------:|
+|           ***Grafico WGAN su MNIST***           |           ***Grafico WGAN su CelebA***           |
+
 #### Esempio di run
 
 ```
@@ -624,6 +635,12 @@ Ciò si ottiene utilizzando un'architettura del modello relativamente semplice e
 #### Descrizione
 
 
+
+#### Grafici
+
+| ![GAN_Loss_G_vs_D](./assets/log/MNIST-began.png) | ![GAN_Loss_G_vs_D](./assets/log/CelebA-began.png) |
+|:------------------------------------------------:|:-------------------------------------------------:|
+|           ***Grafico BEGAN su MNIST***            |           ***Grafico BEGAN su CelebA***           |
 
 #### Esempio di run
 
@@ -673,6 +690,12 @@ Inoltre, utilizziamo le funzionalità apprese per nuovi compiti, dimostrando la 
 
 
 
+#### Grafici
+
+| ![GAN_Loss_G_vs_D](./assets/log/MNIST-dcgan.png) | ![GAN_Loss_G_vs_D](./assets/log/CelebA-dcgan.png) |
+|:------------------------------------------------:|:-------------------------------------------------:|
+|           ***Grafico DCGAN su MNIST***           |           ***Grafico DCGAN su CelebA***           |
+
 #### Esempio di run
 
 ```
@@ -720,6 +743,12 @@ Mostriamo anche che un'architettura a scala singola può essere addestrata per g
 #### Descrizione
 
 
+
+#### Grafici
+
+| ![GAN_Loss_G_vs_D](./assets/log/MNIST-ebgan.png) | ![GAN_Loss_G_vs_D](./assets/log/CelebA-ebgan.png) |
+|:------------------------------------------------:|:-------------------------------------------------:|
+|           ***Grafico EBGAN su MNIST***           |           ***Grafico EBGAN su CelebA***           |
 
 #### Esempio di run
 
