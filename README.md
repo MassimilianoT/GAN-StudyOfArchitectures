@@ -617,7 +617,7 @@ Choose: ...
 
 ### BEGAN
 
-_BEGAN: Boundary Equilibrium Generative Adversarial Networks_ (31 Maggio 2017)
+_Boundary Equilibrium Generative Adversarial Networks_ (31 Maggio 2017)
 
 #### Autori
 
