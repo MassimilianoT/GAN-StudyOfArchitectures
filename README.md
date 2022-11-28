@@ -476,7 +476,7 @@ Ad esempio, alcuni ricercatori hanno usato le GAN per produrre un discorso parla
 
 ### GAN
 
-_Generative Adversarial Network_
+_Generative Adversarial Network_ (10 Giugno 2014)
 
 #### Autori
 
@@ -530,7 +530,7 @@ Choose: ...
 
 ### WGAN
 
-_Wasserstein Generative Adversarial Network_
+_Wasserstein Generative Adversarial Network_ (6 Dicembre 2017)
 
 #### Autori
 
@@ -617,7 +617,7 @@ Choose: ...
 
 ### BEGAN
 
-_BEGAN: Boundary Equilibrium Generative Adversarial Networks_
+_BEGAN: Boundary Equilibrium Generative Adversarial Networks_ (31 Maggio 2017)
 
 #### Autori
 
@@ -671,7 +671,7 @@ Choose: ...
 
 ### DCGAN
 
-_Deep Convolutional Generative Adversarial Network_
+_Deep Convolutional Generative Adversarial Network_ (7 Gennaio 2016)
 
 #### Autori
 
@@ -725,7 +725,7 @@ Choose: ...
 
 ### EBGAN
 
-_Energy-based Generative Adversarial Network_
+_Energy-based Generative Adversarial Network_ (6 Marzo 2017)
 
 #### Autori
 
