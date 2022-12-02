@@ -634,7 +634,19 @@ Ciò si ottiene utilizzando un'architettura del modello relativamente semplice e
 
 #### Descrizione
 
+Nella Boundary Equilibrium GAN è stata introdotta una modifica all’architettura dei modelli di generatore e discriminatore, introdotto un concetto di equilibrio che va a limitare il problema visto dell’alternarsi del processo di allenamento fra le due reti ed è stata elaborata una nuova misura di convergenza alternativa alla distanza di Wasserstein. 
+Il modello utilizzato è un’architettura Encoder/Decoder: il generatore è composto da un decoder che preso l’embedding ricava un’immagine, mentre il discriminatore è l’encoder che presa un’immagine cerca di trovare il suo embedding. Le due architetture sono simmetriche ma non l’inizializzazione dei pesi. 
+In questo modello a differenza della GAN standard, il discriminatore ha lo scopo di oltre che costruire l’encoding di immagini reali discriminarle da quelle generate. Per bilanciare questi due compiti è stato introdotto il concetto di equilibrio: si introduce un iperparametro gamma detto diversity ratio che permette di fare lavorare più il discriminatore sull’autoencoding di immagini reali. 
+Nella pratica si sostituisce la loss del generatore e del discriminatore utilizzando questa formula:
 
+| ![BEGAN_formula](./assets/readme/began_formula.PNG) |
+| :--------------------------------------------: |
+| *Loss di Generatore e Discriminatore con equilibrio* |
+
+#### Benefici
+Nello stadio iniziale il generatore costruisce immagini facili da ricostruire per il discriminatore visto che i dati generati sono vicini a zero e la distribuzione reale non è stata ancora appresa. In questo modo la loss sulla distribuzione reale rispetto ai dati generati rimane superiore e questo viene mantenuto tramite il concetto di equilibrio visto prima. Grazie a questo approccio non è necessario preallenare il discriminatore o allenare il generatore e il discriminatore alternativamente.
+
+Questo modello permette quindi di generare immagini di alta qualità con una procedura di allenamento standard e un’architettura relativamente semplice.
 
 #### Grafici
 
