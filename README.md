@@ -23,7 +23,7 @@ Progetto per il corso "Machine Learning and Data Mining" per la laurea magistral
     * [Una o due funzioni di loss?](#una-o-due-funzioni-di-loss)
     * [Minimax Loss](#minimax-loss)
     * [Minimax Loss modificata](#minimax-loss-modificata)
-    * [Vulnerabilità della loss function base](#vulnerabilità-della-loss-function-base)
+    * [Vulnerabilità della loss function base](#vulnerabilita-della-loss-function-base)
     * [Ulteriori considerazioni](#ulteriori-considerazioni)
 * [GAN nel mondo reale](#gan-nel-mondo-reale)
   * [Problemi comuni](#problemi-comuni)
@@ -338,7 +338,7 @@ Il generatore non può influenzare direttamente il termine $log(D(x))$ nella fun
 Il paper originale delle GAN fa notare che la loss function minimax sopra riportata può causare il blocco della GAN nei primi passi dell'allenamento, quando il lavoro del discriminatore è molto semplice.
 Il documento suggerisce quindi di modificare la loss del generatore per fare in modo che esso provi a massimizzare $log(D(G(z)))$
 
-#### Vulnerabilità della loss function base
+#### Vulnerabilita della loss function base
 
 - Rischio che la GAN si possa bloccare
 - Rischio di Vanishing Gradient
