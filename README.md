@@ -23,7 +23,7 @@ Progetto per il corso "Machine Learning and Data Mining" per la laurea magistral
     * [Una o due funzioni di loss?](#una-o-due-funzioni-di-loss)
     * [Minimax Loss](#minimax-loss)
     * [Minimax Loss modificata](#minimax-loss-modificata)
-    * [Vulnerabilità della loss function base](#vulnerabilit-della-loss-function-base)
+    * [Vulnerabilità della loss function base](#vulnerabilità-della-loss-function-base)
     * [Ulteriori considerazioni](#ulteriori-considerazioni)
 * [GAN nel mondo reale](#gan-nel-mondo-reale)
   * [Problemi comuni](#problemi-comuni)
