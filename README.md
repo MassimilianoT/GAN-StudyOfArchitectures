@@ -767,6 +767,7 @@ con $[.]+ = max(0,.)$
 Si può dimostrare che a seguito dell'allenamento si raggiunge un equilibrio di Nash nel sistema e (Th.) la probabilità della distribuzione generata è identica alla probabilità dei dati reali ovunque. 
 
 Dal punto di vista dei modelli, il discriminatore è costituito da un autoencoder: $D(x) = ||Dec(Enc(x))-x||$
+
 Questa scelta deriva dal fatto che gli autoencoder allenati con alcuni termini di regolarizzazione sono in grado di imparare una funzione energetica senza superivisione o istanze negative. E' possibile inoltre introdurre un termine di regolarizzazione Pulling-away Term (PT) che evita che il modello produca dati clusterizzati intorno a solo una o poche modalità della distribuzione reale.
 
 Con una serie di esperimenti è stato dimostrato che l'architettura EBGAN con iperparametri ottimizzati mediante grisearch supera l'architettura base GAN, ma fatica con immagini di risoluzione superiore (ImageNet) riuscendo però ad imparare alcuni dettagli sulla struttura delle immagini (sfondo, orizzonte, struttura del corpo dei cani etc.).
