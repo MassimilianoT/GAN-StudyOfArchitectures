@@ -754,7 +754,22 @@ Mostriamo anche che un'architettura a scala singola può essere addestrata per g
 
 #### Descrizione
 
+L'idea base dei modelli Energy-based è definire una funzione energetica che mappa ogni punto nello spazio di input in scalari: nel processo di allenamento la superficie energetica è costruita in modo tale da assegnare alle configurazioni desiderate bassa energia mentre a quelle indesiderate alta energia. Questa idea può essere combinata con l'architettura delle GAN proposta nel 2014 da Goodfellow et al (#gan): il discriminatore si può vedere come una funzione energetica senza un interpretazione probabilistica esplicita mentre il generatore si può vedere come una funzione parametrizzabile che produce samples dalle regioni dello spazio a cui il discriminatore associa bassa energia.
 
+In questa architettura le loss sono modificate secondo le seguenti formule:
+
+**Loss function del discriminatore:** $D(x) + [m - D(G(z))]+$
+
+con $[.]+ = max(0,.)$
+
+**Loss function del generatore:** $D(G(z))$
+
+Si può dimostrare che a seguito dell'allenamento si raggiunge un equilibrio di Nash nel sistema e (Th.) la probabilità della distribuzione generata è identica alla probabilità dei dati reali ovunque. 
+
+Dal punto di vista dei modelli, il discriminatore è costituito da un autoencoder: $D(x) = ||Dec(Enc(x))-x||$
+Questa scelta deriva dal fatto che gli autoencoder allenati con alcuni termini di regolarizzazione sono in grado di imparare una funzione energetica senza superivisione o istanze negative. E' possibile inoltre introdurre un termine di regolarizzazione Pulling-away Term (PT) che evita che il modello produca dati clusterizzati intorno a solo una o poche modalità della distribuzione reale.
+
+Con una serie di esperimenti è stato dimostrato che l'architettura EBGAN con iperparametri ottimizzati mediante grisearch supera l'architettura base GAN, ma fatica con immagini di risoluzione superiore (ImageNet) riuscendo però ad imparare alcuni dettagli sulla struttura delle immagini (sfondo, orizzonte, struttura del corpo dei cani etc.).
 
 #### Grafici
 
