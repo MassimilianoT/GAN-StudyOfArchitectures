@@ -700,7 +700,25 @@ Inoltre, utilizziamo le funzionalità apprese per nuovi compiti, dimostrando la 
 
 #### Descrizione
 
+I tentativi storici di aumentare le GAN utilizzando le CNN per modellare le immagini non hanno avuto successo.
+Ciò ha motivato gli autori di LAPGAN (Denton et al., 2015) a sviluppare un approccio alternativo per aumentare iterativamente le immagini generate a bassa risoluzione che così possono essere modellate in modo più affidabile.
+Il fulcro di questo approccio è l'adozione e la modifica di tre cambiamenti recentemente dimostrati alle architetture CNN.
+La prima è la rete all convolutional (Springenberg et al., 2014) che sostituisce le funzioni deterministiche di pooling spaziale (come il maxpooling) con convoluzioni strided, consentendo alla rete di apprendere il proprio downsampling spaziale.
+Usiamo questo approccio nel nostro generatore, permettendogli di apprendere il proprio sovracampionamento spaziale, e nel discriminatore.
+La seconda è la tendenza verso l'eliminazione di strati completamente connessi in coda alla rete convoluzionale.
+Il primo strato delle GAN, che prende come input una distribuzione uniforme del rumore Z, potrebbe essere definito completamente connesso in quanto è solo una moltiplicazione di matrici, ma il risultato viene rimodellato in un tensore 4-dimensionale e utilizzato come inizio dello stack di convoluzione.
+Per il discriminatore, l'ultimo strato di convoluzione viene appiattito e quindi inserito in un singolo output sigmoideo.
 
+| ![GAN_Loss_G_vs_D](./assets/readme/DCGAN.png) |
+|:---------------------------------------------:|
+|                    *DCGAN*                    |
+
+La terza è l'utilizzo della Batch Normalization (Ioffe & Szegedy, 2015) che stabilizza l'apprendimento normalizzando l'input a ciascuna unità per avere media zero e varianza unitaria.
+Questo aiuta a gestire i problemi di addestramento che sorgono a causa di una scarsa inizializzazione e aiuta il flusso del gradiente nei modelli più profondi.
+Ciò si è rivelato fondamentale per consentire ai generatori profondi di iniziare l'apprendimento, impedendo al generatore di collassare tutti i campioni in un unico punto, che è una modalità di errore comune osservata nei GAN.
+L'applicazione diretta di batchnorm a tutti i livelli, tuttavia, ha provocato l'oscillazione del campione e l'instabilità del modello.
+Ciò è stato evitato non applicando batchnorm al livello di output del generatore e al livello di input del discriminatore.
+L'attivazione ReLU (Nair & Hinton, 2010) viene utilizzata nel generatore ad eccezione del livello di output che utilizza la funzione Tanh.
 
 #### Grafici
 
